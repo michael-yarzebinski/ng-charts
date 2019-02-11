@@ -1,0 +1,89 @@
+<svg:g>
+    <!--Major Ticks-->
+        <svg:g *ngFor="let tick of MajorTicks" [attr.transform]="Transform">
+            <!--Labels-->
+            <svg:text *ngIf="Axis.MajorTicks.TickMarks.Show" 
+                      [attr.x]="Scale(tick)"
+                      [attr.y]="(Axis.Position == 'Top' ? - Axis.MajorTicks.Labels.Space / 2 : Dimensions.Plot.Height + Axis.MajorTicks.Labels.Space / 2 + Axis.MajorTicks.Labels.SVGStyle.FontSize)"
+                      [attr.stroke]="Axis.MajorTicks.Labels.SVGStyle.Stroke"
+                      [attr.stroke-width]="Axis.MajorTicks.Labels.SVGStyle.StrokeWidth"
+                      [attr.fill]="Axis.MajorTicks.Labels.SVGStyle.Stroke"
+                      [attr.font-size]="Axis.MajorTicks.Labels.SVGStyle.FontSize"
+                      [attr.text-anchor]="'middle'">
+                {{Axis.MajorTicks.Format(tick)}} 
+            </svg:text>
+            <!--Tick Lines-->
+            <svg:line *ngIf="Axis.MajorTicks.TickMarks.Show && !Axis.MajorTicks.GridLines.Show" 
+                      [attr.x1]="Scale(tick)"
+                      [attr.y1]="(Axis.Position == 'Top' ? 0 : Dimensions.Plot.Height)"
+                      [attr.x2]="Scale(tick)"
+                      [attr.y2]="(Axis.Position == 'Top' ? Axis.MajorTicks.TickMarks.Size : Dimensions.Plot.Height - Axis.MajorTicks.TickMarks.Size)"
+                      [attr.stroke]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke"
+                      [attr.stroke-width]="Axis.MajorTicks.TickMarks.SVGStyle.StrokeWidth"
+                      [attr.fill]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke" />
+              <!--Grid Lines--> 
+            <svg:line *ngIf="Axis.MajorTicks.GridLines.Show"
+                      [attr.x1]="Scale(tick)"
+                      [attr.y1]="0"
+                      [attr.x2]="Scale(tick)"
+                      [attr.y2]="Dimensions.Plot.Height + 0"
+                      [attr.stroke]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke"
+                      [attr.stroke-width]="Axis.MajorTicks.TickMarks.SVGStyle.StrokeWidth"
+                      [attr.fill]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke"/>
+        </svg:g>
+
+    <!--<svg:g *ngIf="Ticks.MajorTicks.ShowMark && (!Ticks.MajorTicks.GridLines || !Ticks.MajorTicks.GridLines.ShowGridLine)">
+        <svg:g *ngFor="let tick of MajorTicks">
+            <svg:line [attr.x1]="Scale(tick)"
+                      [attr.y1]="Dimensions.Plot.Height + (Position == 'Top' ? Ticks.MajorTicks.Height : Dimensions.Plot.Height)"
+                      [attr.x2]="Scale(tick)"
+                      [attr.y2]="Dimensions.Plot.Height + (Position == 'Top' ? 0 : Dimensions.Plot.Height - Ticks.MajorTicks.Height)"
+                      [attr.stroke]="Ticks.MajorTicks.Styling.Stroke"
+                      [attr.stroke-width]="1"
+                      [attr.fill]="Ticks.MajorTicks.Styling.Stroke" />
+        </svg:g>
+    </svg:g>
+
+    <svg:g *ngIf="Ticks.MajorTicks.GridLines.ShowGridLine">
+        <svg:g *ngFor="let tick of MajorTicks">
+            <svg:line [attr.x1]="Scale(tick)"
+                      [attr.y1]="0"
+                      [attr.x2]="Scale(tick)"
+                      [attr.y2]="Dimensions.Plot.Height"
+                      [attr.stroke]="Ticks.MajorTicks.Styling.Stroke"
+                      [attr.stroke-width]="1"
+                      [attr.fill]="Ticks.MajorTicks.Styling.Stroke" />
+        </svg:g>
+    </svg:g>
+
+    <svg:g *ngIf="Ticks.MajorTicks.ShowMark">
+        <svg:g *ngFor="let tick of MajorTicks">
+            <svg:text [attr.x]="Scale(tick)"
+                      [attr.y]="Dimensions.Plot.Height + (Position == 'Top' ? 0 : Dimensions.Plot.Height + 8)"
+                      [attr.stroke]="Ticks.MajorTicks.Styling.Stroke"
+                      [attr.stroke-width]="Ticks.MajorTicks.Styling.StrokeWidth"
+                      [attr.fill]="Ticks.MajorTicks.Styling.Stroke"
+                      [attr.font-size]="Ticks.MajorTicks.Styling.FontSize"
+                      [attr.text-anchor]="'middle'">
+                {{tick}}
+            </svg:text>
+        </svg:g>
+    </svg:g>
+
+
+    <svg:g *ngIf="Ticks.MajorTicks.GridLines.ShowGridLine" >
+        <svg:g *ngFor="let tick of MajorTicks">
+            <svg:line
+                [attr.x1]="Scale(tick)"
+                [attr.y1]="0"
+                [attr.x2]="Scale(tick)"
+                [attr.y2]="Dimensions.Plot.Height"
+                [attr.stroke]="Ticks.MajorTicks.Styling.Stroke"
+                [attr.stroke-width]="1"
+                [attr.fill]="Ticks.MajorTicks.Styling.Stroke"
+                />
+        </svg:g>
+
+    </svg:g>-->
+
+</svg:g>

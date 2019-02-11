@@ -1,0 +1,51 @@
+<svg:g [attr.transform]="Transform">
+    <svg:rect
+              [attr.x]="-LegendOptions.Padding / 2"
+              [attr.y]="-LegendOptions.Padding / 2"
+              [attr.rx]="LegendOptions.Padding"
+              [attr.ry]="LegendOptions.Padding"
+              [attr.width]="(LegendOptions.Orientation == 'Horizontal' ? LegendOptions.ItemWidth * Series.length : LegendOptions.ItemWidth) + LegendOptions.Padding / 2"
+              [attr.height]="(LegendOptions.Orientation == 'Vertical' ? LegendOptions.ItemHeight * Series.length : LegendOptions.ItemHeight) + LegendOptions.Padding / 2"
+              fill="rgba(169,169,169, 0.4)"
+              />
+    <svg:g *ngFor="let series of Series; index as i">
+        <svg:g [attr.transform]="'translate(' + (LegendOptions.Orientation == 'Horizontal' ? LegendOptions.ItemWidth * i : 0) + ',' + (LegendOptions.Orientation == 'Vertical' ? LegendOptions.ItemHeight * i : 0) + ')'">
+            <svg:line *ngIf="series.Type == 'Line'"
+                      [attr.x1]="LegendOptions.Padding / 2"
+                      [attr.y1]="LegendOptions.ItemHeight / 2"
+                      [attr.x2]="LegendOptions.Padding / 2 + LegendOptions.ObjectWidth"
+                      [attr.y2]="LegendOptions.ItemHeight / 2"
+                      [attr.stroke]="series.SVGStyles.Stroke"
+                      [attr.stroke-width]="series.SVGStyles.StrokeWidth"
+                      [attr.dash]="series.SVGStyles.Dash"
+                      />
+            <svg:rect *ngIf="series.Type == 'Area'" 
+                      [attr.x]="LegendOptions.Padding / 2"
+                      [attr.y]="LegendOptions.ItemHeight / 2 - LegendOptions.ObjectWidth / 2 + series.SVGStyles.StrokeWidth"
+                      [attr.rx]="LegendOptions.ObjectWidth / 10"
+                      [attr.ry]="LegendOptions.ObjectWidth / 10"
+                      [attr.width]="LegendOptions.ObjectWidth - series.SVGStyles.StrokeWidth * 2"
+                      [attr.height]="LegendOptions.ObjectWidth - series.SVGStyles.StrokeWidth * 2"
+                      [attr.stroke]="series.SVGStyles.Stroke"
+                      [attr.stroke-width]="series.SVGStyles.StrokeWidth"
+                      [attr.fill]="series.SVGStyles.Stroke"
+                      />
+            <svg:circle *ngIf="series.Type == 'Scatter'"
+                        [attr.cx]="LegendOptions.Padding * 2"
+                        [attr.cy]="LegendOptions.ItemHeight / 2"
+                        [attr.r]="LegendOptions.ObjectWidth / 2 - series.SVGStyles.StrokeWidth"
+                        [attr.stroke]="series.SVGStyles.Stroke"
+                        [attr.stroke-width]="series.SVGStyles.StrokeWidth"
+                        [attr.fill]="series.SVGStyles.Stroke"
+                        />
+            <svg:text
+                      [attr.x]="LegendOptions.Padding * 3/2 + LegendOptions.ObjectWidth"
+                      [attr.y]="LegendOptions.ItemHeight / 2 + LegendOptions.FontSize / 3"
+                      [attr.font-size]="LegendOptions.FontSize"
+                      >
+                {{series.Name}}
+
+            </svg:text>
+        </svg:g>
+    </svg:g>
+</svg:g>

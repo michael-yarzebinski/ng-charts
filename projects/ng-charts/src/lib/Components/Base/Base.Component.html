@@ -1,0 +1,6 @@
+<div>
+    <svg [attr.height]="Height + 10" [attr.width]="Width + 10">
+        <svg:g ngc-legend [Series]="Series" [LegendOptions]="LegendOptions" [Dimensions]="Dimensions"></svg:g>
+        <ng-content></ng-content>
+    </svg>
+</div>

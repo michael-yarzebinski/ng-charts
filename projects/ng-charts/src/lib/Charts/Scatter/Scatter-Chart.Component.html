@@ -1,0 +1,27 @@
+<ngc-base-chart [Width]="Width" [Height]="Height" [Dimensions]="Dimensions">
+    <!--<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />-->
+    <svg:g [attr.transform]="Transform">
+        <!--<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />-->
+        <svg:g ngc-x-axis [Scale]="XScale" [Axis]="XAxis" [Dimensions]="Dimensions"></svg:g>
+        <svg:g ngc-y-axis [Scale]="YScale" [Axis]="YAxis" [Dimensions]="Dimensions"></svg:g>
+        <svg:defs>
+            <svg:clipPath id="PlotClipPath">
+                <svg:rect [attr.width]="Dimensions.Plot.Width"
+                          [attr.height]="Dimensions.Plot.Height"
+                          [attr.x]="Dimensions.PlotWAxes.X + Dimensions.Plot.X"
+                          [attr.y]="Dimensions.PlotWAxes.Y + Dimensions.Plot.Y" />
+
+            </svg:clipPath>
+        </svg:defs>
+        <svg:g [attr.clip-path]="ClipPath">
+            <svg:g *ngFor="let series of ScatterSeries">
+                <svg:g ngc-scatter-series
+                       [Series]="series"
+                       [XScale]="XScale"
+                       [YScale]="YScale"
+                       [Dimensions]="Dimensions" />
+
+            </svg:g>
+        </svg:g>
+    </svg:g>
+</ngc-base-chart> 

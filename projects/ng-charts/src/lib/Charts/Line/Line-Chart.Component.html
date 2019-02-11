@@ -1,0 +1,29 @@
+<ngc-base-chart [Width]="Width" [Height]="Height" [Dimensions]="Dimensions" [Series]="Series" [LegendOptions]="LegendOptions">
+    <!--<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />-->
+    <svg:g [attr.transform]="Transform">
+        <!--<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />-->
+        <svg:g ngc-x-axis [Scale]="XScale" [Axis]="XAxis" [Dimensions]="Dimensions"></svg:g>
+        <svg:g *ngFor="let axis of YAxes">
+            <svg:g ngc-y-axis [Scale]="(axis.Position == 'Left' ? Y1Scale : Y2Scale)" [Axis]="axis" [Dimensions]="Dimensions"></svg:g>
+        </svg:g>
+        <svg:defs>
+            <svg:clipPath id="PlotClipPath">
+                <svg:rect [attr.width]="Dimensions.Plot.Width"
+                          [attr.height]="Dimensions.Plot.Height"
+                          [attr.x]="Dimensions.PlotWAxes.X + Dimensions.Plot.X"
+                          [attr.y]="Dimensions.PlotWAxes.Y + Dimensions.Plot.Y" />
+
+            </svg:clipPath>
+        </svg:defs>
+        <svg:g [attr.clip-path]="ClipPath">
+            <svg:g *ngFor="let series of Series">
+                <svg:g ngc-line-series
+                       [Series]="series"
+                       [XScale]="XScale"
+                       [YScale]="(series.YAxis == 'Left' ? Y1Scale : Y2Scale)"
+                       [Dimensions]="Dimensions" />
+
+            </svg:g>
+        </svg:g>
+    </svg:g>
+</ngc-base-chart> 

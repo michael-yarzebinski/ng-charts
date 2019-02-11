@@ -1,0 +1,36 @@
+<svg:g>
+    <!--Major Ticks-->
+    <svg:g *ngFor="let tick of MajorTicks" [attr.transform]="Transform">
+        <!--Labels-->
+        <svg:text *ngIf="Axis.MajorTicks.TickMarks.Show"
+                  [attr.x]="(Axis.Position == 'Left' ? - Axis.MajorTicks.Labels.Space / 2 : Dimensions.Plot.Width + Axis.MajorTicks.Labels.Space / 2)"
+                  [attr.y]="Scale(tick) + Axis.MajorTicks.Labels.SVGStyle.FontSize / 3"
+                  [attr.stroke]="Axis.MajorTicks.Labels.SVGStyle.Stroke"
+                  [attr.stroke-width]="Axis.MajorTicks.Labels.SVGStyle.StrokeWidth"
+                  [attr.fill]="Axis.MajorTicks.Labels.SVGStyle.Stroke"
+                  [attr.font-size]="Axis.MajorTicks.Labels.SVGStyle.FontSize"
+                  [attr.text-anchor]="'middle'">
+            {{Axis.MajorTicks.Format(tick)}}
+        </svg:text>
+        <!--Tick Lines-->
+        <svg:line *ngIf="Axis.MajorTicks.TickMarks.Show && !Axis.MajorTicks.GridLines.Show"
+                  [attr.x1]="(Axis.Position == 'Left' ? 0 : Dimensions.Plot.Width)"
+                  [attr.y1]="Scale(tick)"
+                  [attr.y2]="Scale(tick)"
+                  [attr.x2]="(Axis.Position == 'Left' ? Axis.MajorTicks.TickMarks.Size : Dimensions.Plot.Width - Axis.MajorTicks.TickMarks.Size)"
+                  [attr.stroke]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke"
+                  [attr.stroke-width]="Axis.MajorTicks.TickMarks.SVGStyle.StrokeWidth"
+                  [attr.fill]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke" />
+        <!--Grid Lines-->
+        <svg:line *ngIf="Axis.MajorTicks.GridLines.Show"
+                  [attr.x1]="0"
+                  [attr.y1]="Scale(tick)"
+                  [attr.y2]="Scale(tick)"
+                  [attr.x2]="(Axis.Position == 'Left' ? Dimensions.Plot.Width : Dimensions.Plot.Width)"
+                  [attr.stroke]="Axis.MajorTicks.GridLines.SVGStyle.Stroke"
+                  [attr.stroke-width]="Axis.MajorTicks.GridLines.SVGStyle.StrokeWidth"
+                  [attr.fill]="Axis.MajorTicks.GridLines.SVGStyle.Stroke" />
+
+
+    </svg:g>
+</svg:g>
