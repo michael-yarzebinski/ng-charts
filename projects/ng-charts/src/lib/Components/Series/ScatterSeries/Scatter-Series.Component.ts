@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Series, Point } from '../Series.Classes';
+import { Component, Input, KeyValueDiffers, EventEmitter } from '@angular/core';
+import { ScatterSeries as Series, Point } from '../Series.Classes';
 
 import { line } from 'd3-shape';
 import { Dimensions } from '../../../AdditionalClasses/AdditionalClasses';
@@ -15,28 +15,41 @@ export class ScatterSeries {
     @Input() XScale: any;
     @Input() YScale: any;
     @Input() Dimensions: Dimensions;
+    @Input() MouseOverChart: EventEmitter<Point>;
+
+    // #region Differs
+    SeriesDiffer: any;
+    XScaleDiffer: any;
+    YScaleDiffer: any;
+    DimensionsDiffer: any;
+    // #endregion
 
     Path: string;
     Transform: string;
 
+    constructor(private _differs: KeyValueDiffers) { }
+
     ngOnInit() {
+        this.SeriesDiffer = this._differs.find(this.Series).create();
+        this.XScaleDiffer = this._differs.find(this.XScale).create();
+        this.YScaleDiffer = this._differs.find(this.YScale).create();
+        this.DimensionsDiffer = this._differs.find(this.Dimensions).create();
+
         this.update();
     }
 
-    update() {
-
-        this.Transform = 'translate(' + (this.Dimensions.PlotWAxes.X + this.Dimensions.Plot.X) + ',' + (this.Dimensions.PlotWAxes.Y + this.Dimensions.Plot.Y) + ')';
-
+    ngDoCheck() {
+        if (this._differs) {
+            const changes = this.SeriesDiffer.diff(this.Series) || this.XScaleDiffer.diff(this.XScale) || this.YScaleDiffer.diff(this.YScale) || this.DimensionsDiffer.diff(this.Dimensions);
+            if (changes) {
+                this.update();
+            }
+        }
     }
 
 
-    LineGenerator(): any {
-        return line<Point>()
-            .x(d => {
-                const X = d.X;
-                let value = this.XScale(X);
-                return value;
-            })
-            .y(d => this.YScale(d.Y));
+    update() {
+        this.Transform = 'translate(' + (this.Dimensions.PlotWAxes.X + this.Dimensions.Plot.X) + ',' + (this.Dimensions.PlotWAxes.Y + this.Dimensions.Plot.Y) + ')';
+
     }
 }

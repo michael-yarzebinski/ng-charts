@@ -1,0 +1,3 @@
+<div *ngFor="let tt of tooltipService.components">
+    <ngc-tooltip [TooltipProperties]="tt.TooltipProperties" [InputParameters]="tt.Parameters" [Data]="tt.Data"></ngc-tooltip>
+</div>

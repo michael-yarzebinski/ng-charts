@@ -1,11 +1,19 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dist",
     "\\projects",
+    "\\projects\\demo",
+    "\\projects\\demo\\src",
     "\\projects\\docs",
-    "\\projects\\docs\\src"
+    "\\projects\\docs\\src",
+    "\\projects\\ng-charts",
+    "\\projects\\ng-charts\\src",
+    "\\projects\\ng-charts\\src\\lib",
+    "\\projects\\ng-charts\\src\\lib\\Components",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Legend",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Series\\LineSeries",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Tooltip\\Container"
   ],
-  "SelectedNode": "\\dist\\index.html",
+  "SelectedNode": "\\projects\\docs\\src\\index.html",
   "PreviewInSolutionExplorer": false
 }

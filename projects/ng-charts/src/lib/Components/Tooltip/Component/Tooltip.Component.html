@@ -1,0 +1,5 @@
+<div #ngcTooltip class="ng-charts-tooltip" style="position:absolute" [ngStyle]="{'left':Parameters.AbsoluteX + 'px', 'top':Parameters.AbsoluteY + 'px','visibility':(HideElement ? 'hidden' : 'inherit')}" [ngClass]="{'ng-charts-tooltip-top':(Position == 'Top'),'ng-charts-tooltip-left':(Position == 'Left'),'ng-charts-tooltip-right':(Position == 'Right'),'ng-charts-tooltip-bottom':(Position == 'Bottom') }" >
+    <div [className]="TooltipProperties.CustomClass">
+        <ng-container *ngIf="Parameters" [ngTemplateOutlet]="TooltipProperties.Template" [ngTemplateOutletContext]="{ Data: Data }"> </ng-container>
+    </div>
+</div>

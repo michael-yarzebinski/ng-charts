@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SVGLine } from '../SVG.Classes';
+import { Polygon } from '../SVG.Classes';
 
 
 @Component({
@@ -8,5 +8,5 @@ import { SVGLine } from '../SVG.Classes';
 })
 export class AreaComponent {
     @Input() Path: string;
-    @Input() Style: SVGLine;
+    @Input() Style: Polygon;
 }

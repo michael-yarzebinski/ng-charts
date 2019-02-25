@@ -14,3 +14,4 @@ export * from './lib/Components/Base/Base.Class';
 export * from './lib/Components/Legend/Legend.Classes';
 export * from './lib/Components/Series/Series.Classes';
 export * from './lib/SVG/SVG.Classes';
+export * from './lib/BuildDefaults'

@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, KeyValueDiffers } from '@angular/core';
 import { BaseChartClass, BaseChart } from '../../Components/Base/Base.Class';
-import { Series } from '../../Components/Series/Series.Classes';
+import { AreaSeries } from '../../Components/Series/Series.Classes';
 import { Axis } from '../../Components/Axes/Axes.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { LegendOptions } from '../../Components/Legend/Legend.Classes';
@@ -11,11 +11,19 @@ import { LegendOptions } from '../../Components/Legend/Legend.Classes';
 })
 export class AreaChart extends BaseChartClass implements BaseChart {
     @Input() LegendOptions: LegendOptions;
-    @Input() Series: Series[];
+    @Input() Series: AreaSeries[];
     @Input() XAxis: Axis;
     @Input() YAxes: Axis[];
     @Input() Width: number;
     @Input() Height: number;
+
+    // #region Differs
+    private LegendOptionsDiffer: any;
+    private SeriesDiffer: any;
+    private XAxisDiffer: any;
+    private YAxesDiffer: any;
+    // #endregion
+
     Dimensions: Dimensions;
     Transform: string;
     XScale: any;
@@ -23,8 +31,27 @@ export class AreaChart extends BaseChartClass implements BaseChart {
     Y2Scale: any;
     ClipPath: string;
 
+    constructor(private _differs: KeyValueDiffers) {
+        super();
+    }
+
     ngOnInit() {
+        this.LegendOptionsDiffer = this._differs.find(this.LegendOptions).create();
+        this.SeriesDiffer = this._differs.find(this.Series).create();
+        this.XAxisDiffer = this._differs.find(this.XAxis).create();
+        this.YAxesDiffer = this._differs.find(this.YAxes).create();
+
         this.update();
+    }
+
+    ngDoCheck() {
+        if (this._differs) {
+            const changes = this.LegendOptionsDiffer.diff(this.LegendOptions) || this.SeriesDiffer.diff(this.Series) || this.XAxisDiffer.diff(this.XAxis) || this.YAxesDiffer.diff(this.YAxes);
+
+            if (changes) {
+                this.update();
+            }
+        }
     }
 
     update() {

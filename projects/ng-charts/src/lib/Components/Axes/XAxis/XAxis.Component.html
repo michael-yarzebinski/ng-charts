@@ -1,14 +1,15 @@
-
-<svg:g *ngIf="Axis.Label.Show">
-    <svg:text [attr.stroke]="Axis.Label.SVGStyle.Stroke"
-                [attr.stroke-width]="Axis.Label.SVGStyle.StrokeWidth"
-                [attr.font-size]="Axis.Label.SVGStyle.FontSize"
-                [attr.x]="Dimensions.Plot.X + Dimensions.Plot.Width / 2"
-                [attr.y]="(Axis.Position == 'Top' ? Axis.Label.Space / 2 : Dimensions.PlotWAxesALabels.Height - Axis.Label.Space / 2 + Axis.Label.SVGStyle.FontSize)"
-                [attr.text-anchor]="'middle'">
-        {{Axis.Label.Text}}
-    </svg:text>
+<svg:g *ngIf="Axis.Show">
+    <svg:g *ngIf="Axis.Title.Show">
+        <svg:text [attr.stroke]="Axis.Title.Style.Color"
+                  [attr.stroke-width]="Axis.Title.Style.Thickness"
+                  [attr.font-size]="Axis.Title.Style.FontSize"
+                  [attr.x]="Dimensions.Plot.X + Dimensions.Plot.Width / 2"
+                  [attr.y]="(Axis.Position == 'Top' ? Axis.Title.Space / 2 : Dimensions.PlotWAxesALabels.Height - Axis.Title.Space / 2 + Axis.Title.Style.FontSize)"
+                  [attr.text-anchor]="'middle'">
+            {{Axis.Title.Text}}
+        </svg:text>
+    </svg:g>
+    <svg:g [attr.transform]="Transform">
+        <svg:g ngc-x-axis-ticks [Axis]="Axis" [Scale]="Scale" [Dimensions]="Dimensions"></svg:g>
+    </svg:g>
 </svg:g>
-<svg:g [attr.transform]="Transform">
-    <svg:g ngc-x-axis-ticks [Axis]="Axis" [Scale]="Scale" [Dimensions]="Dimensions"></svg:g>
-</svg:g> 

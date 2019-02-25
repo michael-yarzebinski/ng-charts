@@ -1,9 +1,12 @@
+import { HostListener, EventEmitter } from '@angular/core'
+
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 
-import { Point, Series } from '../Series/Series.Classes';
+import { Point, AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
 import { Dimensions, Dimension } from '../../AdditionalClasses/AdditionalClasses';
 import { Axis } from '../Axes/Axes.Classes';
 import { LegendOptions } from '../Legend/Legend.Classes';
+import { TooltipParameters } from '../Tooltip/Tooltip.Class';
 
 
 export interface BaseChart
@@ -13,11 +16,18 @@ export interface BaseChart
 
 export class BaseChartClass implements BaseChart
 {
+    // #region Event Properties
+    ChartHover: EventEmitter<any[]> = new EventEmitter<any[]>();
+    MouseOverChart: boolean = false;
+
+    // #endregion
+
+
 
     update()
     {
     }
-    public BuildXScale(Series: Series[], Width: number, Min?: any, Max?: any): any
+    public BuildXScale(Series: (AreaSeries | LineSeries | ScatterSeries)[], Width: number, Min?: any, Max?: any, Reverse?: boolean): any
     {
         // #region Get X Domain
         let uniqueValues = [];
@@ -90,7 +100,12 @@ export class BaseChartClass implements BaseChart
             domain = uniqueValues;
             //I had some stuff about XSet here.  Don't remember what that does.
         }
-
+        // #region Reverse Domain if necessary
+        if (Reverse)
+        {
+            domain = domain.reverse();
+        }
+        // #endregion
         // #endregion
         // #region Get X Scale
         let scale;
@@ -112,7 +127,7 @@ export class BaseChartClass implements BaseChart
         return scale;
     }
 
-    public BuildYScale(Series: Series[],Height:number,  Min?: any, Max?: any): any
+    public BuildYScale(Series: (AreaSeries | LineSeries | ScatterSeries)[], Height: number, Min?: any, Max?: any, Reverse?: boolean): any
     {
         let uniqueValues = [];
         for (let series of Series) {
@@ -129,6 +144,11 @@ export class BaseChartClass implements BaseChart
         max = Max != undefined ? Max : Math.max(...uniqueValues);
 
         let domain = [min, max];
+
+        if (Reverse)
+        {
+            domain = domain.reverse();
+        }
 
         const scale = scaleLinear()
             .range([Height, 0])
@@ -174,22 +194,22 @@ export class BaseChartClass implements BaseChart
 
 
         chartDimensions.PlotWAxes = new Dimension();
-        chartDimensions.PlotWAxes.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 ? YAxes.find((axis) => axis.Position == 'Left').Label.Space : 0);// + chartDimensions.PlotWAxesALabels.X;   //If the X Axis is on the top, leave space for the label.
-        chartDimensions.PlotWAxes.Y = (XAxis.Position == 'Top' ? XAxis.Label.Space : 0);// + chartDimensions.PlotWAxesALabels.Y;
-        chartDimensions.PlotWAxes.Width = chartDimensions.PlotWAxesALabels.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Label.Space : 0) - chartDimensions.PlotWAxes.X;
-        chartDimensions.PlotWAxes.Height = chartDimensions.PlotWAxesALabels.Height - (XAxis.Position == 'Bottom' ? XAxis.Label.Space : 0) - chartDimensions.PlotWAxes.Y;
+        chartDimensions.PlotWAxes.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 ? YAxes.find((axis) => axis.Position == 'Left').Title.Space : 0);// + chartDimensions.PlotWAxesALabels.X;   //If the X Axis is on the top, leave space for the label.
+        chartDimensions.PlotWAxes.Y = (XAxis.Position == 'Top' ? XAxis.Title.Space : 0);// + chartDimensions.PlotWAxesALabels.Y;
+        chartDimensions.PlotWAxes.Width = chartDimensions.PlotWAxesALabels.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Title.Space : 0) - chartDimensions.PlotWAxes.X;
+        chartDimensions.PlotWAxes.Height = chartDimensions.PlotWAxesALabels.Height - (XAxis.Position == 'Bottom' ? XAxis.Title.Space : 0) - chartDimensions.PlotWAxes.Y;
         
 
         chartDimensions.Plot = new Dimension();
-        chartDimensions.Plot.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 && YAxes.find((axis) => axis.Position == 'Left').MajorTicks.Labels.Show ? YAxes.find((axis) => axis.Position == 'Left').MajorTicks.Labels.Space : 0);// + chartDimensions.PlotWAxes.X;
-        chartDimensions.Plot.Y = (XAxis.MajorTicks.Labels.Show && XAxis.Position == 'Top' ? XAxis.MajorTicks.Labels.Space : 0);// + chartDimensions.PlotWAxes.Y;
-        chartDimensions.Plot.Height = chartDimensions.PlotWAxes.Height - (XAxis.Position == 'Bottom' ? XAxis.MajorTicks.Labels.Space : 0) - chartDimensions.Plot.Y;
-        chartDimensions.Plot.Width = chartDimensions.PlotWAxes.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').MajorTicks.Labels.Space : 0) - chartDimensions.Plot.X;
+        chartDimensions.Plot.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 && YAxes.find((axis) => axis.Position == 'Left').Labels.Show ? YAxes.find((axis) => axis.Position == 'Left').Labels.Space : 0);// + chartDimensions.PlotWAxes.X;
+        chartDimensions.Plot.Y = (XAxis.Labels.Show && XAxis.Position == 'Top' ? XAxis.Labels.Space : 0);// + chartDimensions.PlotWAxes.Y;
+        chartDimensions.Plot.Height = chartDimensions.PlotWAxes.Height - (XAxis.Position == 'Bottom' ? XAxis.Labels.Space : 0) - chartDimensions.Plot.Y;
+        chartDimensions.Plot.Width = chartDimensions.PlotWAxes.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Labels.Space : 0) - chartDimensions.Plot.X;
 
         return chartDimensions;
     }
 
-    public CombineChartSeries(ChartSeries: [Series[], Series[], Series[]]): Series[]
+    public CombineChartSeries(ChartSeries: [(AreaSeries | LineSeries | ScatterSeries)[], (AreaSeries | LineSeries | ScatterSeries)[], (AreaSeries | LineSeries | ScatterSeries)[]]): (AreaSeries | LineSeries | ScatterSeries)[]
     {
         let ro = [];
         for (let chart of ChartSeries)
@@ -202,97 +222,50 @@ export class BaseChartClass implements BaseChart
         return ro;
     }
 
-    // #region Old
-    //GetXDomain(Series: Series[], Min?: any, Max?:any): any[]
-    //{
-    //    let uniqueValues = [];
-    //    for (let series of Series)
-    //    {
-    //        for (let point of series.Data)
-    //        {
-    //            if (!uniqueValues.includes(point.X))
-    //            {
-    //                uniqueValues.push(point.X);
-    //            }
-    //        }
-    //    }
+    public ChangeMouseOverChart(Value: boolean, Event:any = null)
+    {
+        if (Value == false) {   //This allows hovering over paths on the chart.
+            let e = Event.toElement
+            if (e != null && ["circle", "path"].indexOf(e.nodeName) == -1) {
+                this.MouseOverChart = Value;
+            }
+        }
+        else {
+            this.MouseOverChart = Value;
+        }
 
-    //    let scaleType = this.GetScaleType(uniqueValues);
+        if (!this.MouseOverChart)   //When mouse leaves chart area, reset Mouse X Position.
+        {
+            this.ChartHover.emit(null);
+        }
+    }
 
-    //    let domain = [];
-    //    let min, max;
+    public MouseMoveOverChart(Event: any)
+    {
+        let ChartDimensions: Point;
+        let ChartLocation: Point
+        try {
+            ChartDimensions = {
+                X: Event.path[0].getBoundingClientRect().x,
+                Y: Event.path[0].getBoundingClientRect().y
+            }
+            ChartLocation = {
+                X: Event.clientX - Event.path[0].getBoundingClientRect().x,
+                Y: Event.clientY - Event.path[0].getBoundingClientRect().y
+            }
+        }
+        catch
+        {
+            ChartDimensions = {
+                X: Event.srcElement.getBoundingClientRect().left,
+                Y: Event.srcElement.getBoundingClientRect().top
+            }
+            ChartLocation = {
+                X: Event.clientX - Event.srcElement.getBoundingClientRect().left,
+                Y: Event.clientY - Event.srcElement.getBoundingClientRect().top
+            }
+        }
+        this.ChartHover.emit([ChartDimensions, ChartLocation]);
+    }
 
-    //    if (scaleType == 'Linear')
-    //    {
-    //        uniqueValues = uniqueValues.map(v => Number(v));    //Converts all of Unique Values to numbers if they're in string form.
-    //    }
-
-    //    if (scaleType == 'Time' || scaleType == 'Linear')   //Define min and max for reasonable scale types.
-    //    {
-    //        min = Min != null ? min : Math.min(...uniqueValues);
-    //        max = Max != null ? min : Math.max(...uniqueValues);
-    //    }
-
-    //    if (scaleType == 'Time') {
-    //        domain = [new Date(min), new Date(max)];
-    //        //I had some stuff about XSet here.  Don't remember what that does.
-    //    }
-    //    else if (scaleType == 'Linear') {
-    //        domain = [min, max];
-    //        //I had some stuff about XSet here.  Don't remember what that does.
-    //    }
-    //    else
-    //    {
-    //        domain = uniqueValues;
-    //        //I had some stuff about XSet here.  Don't remember what that does.
-    //    }
-
-    //    return domain;
-    //}
-
-    //GetYDomain(Series: Series[], Min?: any, Max?: any): any[] {
-    //    let uniqueValues = [];
-    //    for (let series of Series) {
-    //        for (let point of series.Data) {
-    //            if (!uniqueValues.includes(point.Y)) {
-    //                uniqueValues.push(point.Y);
-    //            }
-    //        }
-    //    }
-
-    //    let min, max;
-    
-    //    min = Min != null ? min : Math.min(...uniqueValues);
-    //    max = Max != null ? min : Math.max(...uniqueValues);
-
-    //    return [min,max];
-    //}
-
-    //GetXScale(Domain: any[], Width: number, ScaleType: string): any
-    //{
-    //    let scale;
-    //    let bandwidth = 1;  //Not sure what this does yet.  I think it has something to do with the bars, but I havent tested it at all yet.
-
-    //    if (ScaleType == 'time') {
-    //        scale = scaleTime();
-    //    }
-    //    else if (ScaleType == 'linear') {
-    //        scale = scaleLinear();
-    //    }
-    //    else if (ScaleType == 'ordinal')   //Could be an else.
-    //    {
-    //        scale = scalePoint().padding(0.1);
-    //    }
-    //    scale.range([0, Width]).domain(Domain);
-    //    return scale;
-    //}
-
-    //GetYScale(Domain: any[], Height: number): any
-    //{
-    //    const scale = scaleLinear()
-    //        .range([Height, 0])
-    //        .domain(Domain);
-    //    return scale;
-    //}
-    // #endregion
 }

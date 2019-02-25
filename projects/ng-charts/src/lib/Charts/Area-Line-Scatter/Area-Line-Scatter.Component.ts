@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, KeyValueDiffers } from '@angular/core';
 import { BaseChartClass, BaseChart } from '../../Components/Base/Base.Class';
-import { Series } from '../../Components/Series/Series.Classes';
+import { AreaSeries, LineSeries, ScatterSeries } from '../../Components/Series/Series.Classes';
 import { Axis } from '../../Components/Axes/Axes.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { LegendOptions } from '../../Components/Legend/Legend.Classes';
@@ -12,13 +12,22 @@ import { LegendOptions } from '../../Components/Legend/Legend.Classes';
 export class AreaLineScatterChart extends BaseChartClass implements BaseChart
 {
     @Input() LegendOptions: LegendOptions;
-    @Input() AreaSeries: Series[];
-    @Input() LineSeries: Series[];
-    @Input() ScatterSeries: Series[];
+    @Input() AreaSeries: AreaSeries[];
+    @Input() LineSeries: LineSeries[];
+    @Input() ScatterSeries: ScatterSeries[];
     @Input() XAxis: Axis;
     @Input() YAxes: Axis[];
     @Input() Width: number;
     @Input() Height: number;
+
+    // #region Differs
+    private LegendOptionsDiffer: any;
+    private AreaSeriesDiffer: any;
+    private LineSeriesDiffer: any;
+    private ScatterSeriesDiffer: any;
+    private XAxisDiffer: any;
+    private YAxesDiffer: any;
+    // #endregion
 
     Dimensions: Dimensions;
     Transform: string;
@@ -27,10 +36,30 @@ export class AreaLineScatterChart extends BaseChartClass implements BaseChart
     Y2Scale: any;
     ClipPath: string;
 
+    constructor(private _differs: KeyValueDiffers) {
+        super();
+    }
 
     ngOnInit()
     {
+        this.LegendOptionsDiffer = this._differs.find(this.LegendOptions).create();
+        this.AreaSeriesDiffer = this._differs.find(this.AreaSeries).create();
+        this.LineSeriesDiffer = this._differs.find(this.LineSeries).create();
+        this.ScatterSeriesDiffer = this._differs.find(this.ScatterSeries).create();
+        this.XAxisDiffer = this._differs.find(this.XAxis).create();
+        this.YAxesDiffer = this._differs.find(this.YAxes).create();
+
         this.update();
+    }
+
+    ngDoCheck() {
+        if (this._differs) {
+            const changes = this.LegendOptionsDiffer.diff(this.LegendOptions) || this.AreaSeriesDiffer.diff(this.AreaSeries) || this.LineSeriesDiffer.diff(this.LineSeries) || this.ScatterSeriesDiffer.diff(this.ScatterSeries) || this.XAxisDiffer.diff(this.XAxis) || this.YAxesDiffer.diff(this.YAxes);
+
+            if (changes) {
+                this.update();
+            }
+        }
     }
 
     update()

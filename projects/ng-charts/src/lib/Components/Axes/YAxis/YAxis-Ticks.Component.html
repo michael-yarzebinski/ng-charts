@@ -1,35 +1,34 @@
 <svg:g>
-    <!--Major Ticks-->
-    <svg:g *ngFor="let tick of MajorTicks" [attr.transform]="Transform">
+    <svg:g *ngFor="let tick of Ticks" [attr.transform]="Transform">
         <!--Labels-->
-        <svg:text *ngIf="Axis.MajorTicks.TickMarks.Show"
-                  [attr.x]="(Axis.Position == 'Left' ? - Axis.MajorTicks.Labels.Space / 2 : Dimensions.Plot.Width + Axis.MajorTicks.Labels.Space / 2)"
-                  [attr.y]="Scale(tick) + Axis.MajorTicks.Labels.SVGStyle.FontSize / 3"
-                  [attr.stroke]="Axis.MajorTicks.Labels.SVGStyle.Stroke"
-                  [attr.stroke-width]="Axis.MajorTicks.Labels.SVGStyle.StrokeWidth"
-                  [attr.fill]="Axis.MajorTicks.Labels.SVGStyle.Stroke"
-                  [attr.font-size]="Axis.MajorTicks.Labels.SVGStyle.FontSize"
+        <svg:text *ngIf="Axis.Labels.Show"
+                  [attr.x]="(Axis.Position == 'Left' ? - Axis.Labels.Space / 2 : Dimensions.Plot.Width + Axis.Labels.Space / 2)"
+                  [attr.y]="Scale(tick) + Axis.Labels.Style.FontSize / 3"
+                  [attr.stroke]="Axis.Labels.Style.Color"
+                  [attr.stroke-width]="Axis.Labels.Style.Thickness"
+                  [attr.fill]="Axis.Labels.Style.Fill"
+                  [attr.font-size]="Axis.Labels.Style.FontSize"
                   [attr.text-anchor]="'middle'">
-            {{Axis.MajorTicks.Format(tick)}}
+            {{Axis.Labels.Format(tick)}}
         </svg:text>
         <!--Tick Lines-->
-        <svg:line *ngIf="Axis.MajorTicks.TickMarks.Show && !Axis.MajorTicks.GridLines.Show"
+        <svg:line *ngIf="Axis.TickMarks.Show"
                   [attr.x1]="(Axis.Position == 'Left' ? 0 : Dimensions.Plot.Width)"
                   [attr.y1]="Scale(tick)"
                   [attr.y2]="Scale(tick)"
-                  [attr.x2]="(Axis.Position == 'Left' ? Axis.MajorTicks.TickMarks.Size : Dimensions.Plot.Width - Axis.MajorTicks.TickMarks.Size)"
-                  [attr.stroke]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke"
-                  [attr.stroke-width]="Axis.MajorTicks.TickMarks.SVGStyle.StrokeWidth"
-                  [attr.fill]="Axis.MajorTicks.TickMarks.SVGStyle.Stroke" />
+                  [attr.x2]="(Axis.Position == 'Left' ? Axis.TickMarks.Size : Dimensions.Plot.Width - Axis.TickMarks.Size)"
+                  [attr.stroke]="Axis.TickMarks.Style.Color"
+                  [attr.stroke-width]="Axis.TickMarks.Style.Thickness"
+                  [attr.dash]="Axis.TickMarks.Style.Dash" />
         <!--Grid Lines-->
-        <svg:line *ngIf="Axis.MajorTicks.GridLines.Show"
+        <svg:line *ngIf="Axis.GridLines.Show"
                   [attr.x1]="0"
                   [attr.y1]="Scale(tick)"
                   [attr.y2]="Scale(tick)"
                   [attr.x2]="(Axis.Position == 'Left' ? Dimensions.Plot.Width : Dimensions.Plot.Width)"
-                  [attr.stroke]="Axis.MajorTicks.GridLines.SVGStyle.Stroke"
-                  [attr.stroke-width]="Axis.MajorTicks.GridLines.SVGStyle.StrokeWidth"
-                  [attr.fill]="Axis.MajorTicks.GridLines.SVGStyle.Stroke" />
+                  [attr.stroke]="Axis.GridLines.Style.Color"
+                  [attr.stroke-width]="Axis.GridLines.Style.Thickness"
+                  [attr.dash]="Axis.GridLines.Style.Dash" />
 
 
     </svg:g>

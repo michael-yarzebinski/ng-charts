@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SVGPath } from '../SVG.Classes';
+import { Line } from '../SVG.Classes';
 
 
 @Component({
@@ -9,5 +9,5 @@ import { SVGPath } from '../SVG.Classes';
 export class LineComponent
 {
     @Input() Path: string;
-    @Input() Style: SVGPath;
+    @Input() Style: Line;
 }

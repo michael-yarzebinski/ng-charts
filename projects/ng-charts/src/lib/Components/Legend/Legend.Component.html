@@ -1,4 +1,50 @@
-<svg:g [attr.transform]="Transform">
+<svg:g [attr.transform]="Transform" id="NGCLegend">
+    <svg:g *ngFor="let series of Series; index as i" [attr.visibility]="(HideText ? 'hidden' : 'visible')">
+        <svg:g [id]="'NGCLegendSeries' + i" [attr.transform]="series.LegendTransform">
+            <svg:line *ngIf="series.Type == 'Line'"
+                      [attr.x1]="0"
+                      [attr.y1]="- LegendOptions.Style.FontSize / 3"
+                      [attr.x2]="LegendOptions.Style.FontSize"
+                      [attr.y2]="- LegendOptions.Style.FontSize / 3"
+                      [attr.stroke]="series.Style.Color"
+                      [attr.stroke-width]="series.Style.Thickness"
+                      [attr.dash]="series.Style.Dash" />
+            <svg:rect *ngIf="series.Type == 'Area'"
+                      [attr.x]="0"
+                      [attr.y]="0"
+                      [attr.rx]="LegendOptions.Style.FontSize / 10"
+                      [attr.ry]="LegendOptions.Style.FontSize / 10"
+                      [attr.width]="LegendOptions.Style.FontSize"
+                      [attr.height]="LegendOptions.Style.FontSize"
+                      [attr.stroke]="series.Style.Color"
+                      [attr.stroke-width]="series.Style.Thickness"
+                      [attr.fill]="series.Style.Fill" />
+            <svg:circle *ngIf="series.Type == 'Scatter'"
+                        [attr.cx]="LegendOptions.Style.FontSize / 2"
+                        [attr.cy]="LegendOptions.Style.FontSize / 2"
+                        [attr.r]="LegendOptions.Style.FontSize / 2"
+                        [attr.stroke]="series.Style.Color"
+                        [attr.stroke-width]="series.Style.Thickness"
+                        [attr.fill]="series.Style.Fill" />
+
+            <svg:text [attr.fill]="LegendOptions.Style.Color"
+                      [attr.stroke]="LegendOptions.Style.Color"
+                      [attr.stroke-width]="LegendOptions.Style.Thickness"
+                      [attr.font-size]="LegendOptions.Style.FontSize"
+                      [attr.x]="LegendOptions.Style.FontSize * 3 / 2"
+                      [attr.y]="0">
+                {{series.Name}}
+            </svg:text>
+        </svg:g>
+    </svg:g>
+</svg:g>
+
+
+
+
+
+
+<!--<svg:g [attr.transform]="Transform">
     <svg:rect
               [attr.x]="-LegendOptions.Padding / 2"
               [attr.y]="-LegendOptions.Padding / 2"
@@ -15,28 +61,28 @@
                       [attr.y1]="LegendOptions.ItemHeight / 2"
                       [attr.x2]="LegendOptions.Padding / 2 + LegendOptions.ObjectWidth"
                       [attr.y2]="LegendOptions.ItemHeight / 2"
-                      [attr.stroke]="series.SVGStyles.Stroke"
-                      [attr.stroke-width]="series.SVGStyles.StrokeWidth"
-                      [attr.dash]="series.SVGStyles.Dash"
+                      [attr.stroke]="series.Style.Stroke"
+                      [attr.stroke-width]="series.Style.StrokeWidth"
+                      [attr.dash]="series.Style.Dash"
                       />
             <svg:rect *ngIf="series.Type == 'Area'" 
                       [attr.x]="LegendOptions.Padding / 2"
-                      [attr.y]="LegendOptions.ItemHeight / 2 - LegendOptions.ObjectWidth / 2 + series.SVGStyles.StrokeWidth"
+                      [attr.y]="LegendOptions.ItemHeight / 2 - LegendOptions.ObjectWidth / 2 + series.Style.StrokeWidth"
                       [attr.rx]="LegendOptions.ObjectWidth / 10"
                       [attr.ry]="LegendOptions.ObjectWidth / 10"
-                      [attr.width]="LegendOptions.ObjectWidth - series.SVGStyles.StrokeWidth * 2"
-                      [attr.height]="LegendOptions.ObjectWidth - series.SVGStyles.StrokeWidth * 2"
-                      [attr.stroke]="series.SVGStyles.Stroke"
-                      [attr.stroke-width]="series.SVGStyles.StrokeWidth"
-                      [attr.fill]="series.SVGStyles.Stroke"
+                      [attr.width]="LegendOptions.ObjectWidth - series.Style.StrokeWidth * 2"
+                      [attr.height]="LegendOptions.ObjectWidth - series.Style.StrokeWidth * 2"
+                      [attr.stroke]="series.Style.Stroke"
+                      [attr.stroke-width]="series.Style.StrokeWidth"
+                      [attr.fill]="series.Style.Stroke"
                       />
             <svg:circle *ngIf="series.Type == 'Scatter'"
                         [attr.cx]="LegendOptions.Padding * 2"
                         [attr.cy]="LegendOptions.ItemHeight / 2"
-                        [attr.r]="LegendOptions.ObjectWidth / 2 - series.SVGStyles.StrokeWidth"
-                        [attr.stroke]="series.SVGStyles.Stroke"
-                        [attr.stroke-width]="series.SVGStyles.StrokeWidth"
-                        [attr.fill]="series.SVGStyles.Stroke"
+                        [attr.r]="LegendOptions.ObjectWidth / 2 - series.Style.StrokeWidth"
+                        [attr.stroke]="series.Style.Stroke"
+                        [attr.stroke-width]="series.Style.StrokeWidth"
+                        [attr.fill]="series.Style.Stroke"
                         />
             <svg:text
                       [attr.x]="LegendOptions.Padding * 3/2 + LegendOptions.ObjectWidth"
@@ -48,4 +94,4 @@
             </svg:text>
         </svg:g>
     </svg:g>
-</svg:g>
+</svg:g>-->

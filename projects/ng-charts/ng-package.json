@@ -2,6 +2,11 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ng-charts",
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "src/public_api.ts",
+    "umdModuleIds": {
+      "d3-scale": "d3Scale",
+      "d3-shape": "d3Shape"
+
+    }
   }
 }

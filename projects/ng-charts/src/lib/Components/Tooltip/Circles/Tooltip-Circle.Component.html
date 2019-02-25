@@ -1,0 +1,15 @@
+<svg:circle *ngIf="ScatterPoint" [attr.cx]="XScale(ScatterPoint.X)"
+            [attr.cy]="YScale(ScatterPoint.Y)"
+            [attr.r]="ScatterPoint.Radius"
+            [attr.stroke]="GivenSeries.Tooltip.Style.Color"
+            [attr.stroke-width]="GivenSeries.Tooltip.Style.Thickness"
+            [attr.fill]="GivenSeries.Tooltip.Style.Fill"
+            [attr.dash]="GivenSeries.Tooltip.Style.Dash"
+            ngc-tooltip
+            [TooltipProperties]="TooltipProperties"
+            [Parameters]="MouseLocation"
+            [Data]="ScatterPoint"/>
+<ng-template #DefaultTemplate>
+    <h6 style="margin:0">X: {{ScatterPoint.X}}</h6>
+    <h6 style="margin:0">Y: {{ScatterPoint.Y}}</h6>
+</ng-template>

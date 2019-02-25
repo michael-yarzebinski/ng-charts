@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges, EventEmitter, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { LegendOptions } from '../Legend/Legend.Classes';
-import { Series } from '../Series/Series.Classes';
+import { AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
 
 
 @Component({
@@ -14,13 +14,37 @@ export class BaseChartComponent
     @Input() Height: number;
     @Input() Dimensions: Dimensions;
     @Input() LegendOptions: LegendOptions;
-    @Input() Series: Series[];
+    @Input() Series: (AreaSeries | LineSeries | ScatterSeries)[];
+
+    // #region Differs
+    DimensionsDiffer: any;
+    LegendOptionsDiffer: any;
+    SeriesDiffer: any;
+    // #endregion
 
     Transform: string;
 
+    constructor(private _differs: KeyValueDiffers) { }
+
     ngOnInit()
     {
+        this.DimensionsDiffer = this._differs.find(this.Dimensions).create();
+        this.LegendOptionsDiffer = this._differs.find(this.LegendOptions).create();
+        this.SeriesDiffer = this._differs.find(this.Series).create();
+
         this.update();
+    }
+
+    ngDoCheck()
+    {
+        if (this._differs)
+        {
+            const changes = this.DimensionsDiffer.diff(this.Dimensions) || this.LegendOptionsDiffer.diff(this.LegendOptions) || this.SeriesDiffer.diff(this.Series);
+            if (changes)
+            {
+                this.update();
+            }
+        }
     }
 
     update()

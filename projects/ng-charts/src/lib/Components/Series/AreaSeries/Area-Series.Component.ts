@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { Series, Point } from '../Series.Classes';
+import { Component, Input, KeyValueDiffers, EventEmitter } from '@angular/core';
+import { AreaSeries as Series, Point } from '../Series.Classes';
 
-import { line } from 'd3-shape';
 import { Dimensions } from '../../../AdditionalClasses/AdditionalClasses';
 
-import { GenerateLinePath, GenerateAreaPath } from '../Generators'
+import { GenerateAreaPath } from '../Generators';
 
 @Component({
     selector: 'g[ngc-area-series]',
@@ -15,12 +14,36 @@ export class AreaSeries {
     @Input() XScale: any;
     @Input() YScale: any;
     @Input() Dimensions: Dimensions;
+    @Input() MouseOverChart: EventEmitter<Point>;
+
+    // #region Differs
+    SeriesDiffer: any;
+    XScaleDiffer: any;
+    YScaleDiffer: any;
+    DimensionsDiffer: any;
+    // #endregion
 
     Path: string;
     Transform: string;
 
+    constructor(private _differs: KeyValueDiffers) { }
+
     ngOnInit() {
+        this.SeriesDiffer = this._differs.find(this.Series).create();
+        this.XScaleDiffer = this._differs.find(this.XScale).create();
+        this.YScaleDiffer = this._differs.find(this.YScale).create();
+        this.DimensionsDiffer = this._differs.find(this.Dimensions).create();
+
         this.update();
+    }
+
+    ngDoCheck() {
+        if (this._differs) {
+            const changes = this.SeriesDiffer.diff(this.Series) || this.XScaleDiffer.diff(this.XScale) || this.YScaleDiffer.diff(this.YScale) || this.DimensionsDiffer.diff(this.Dimensions);
+            if (changes) {
+                this.update();
+            }
+        }
     }
 
     update() {

@@ -1,0 +1,8 @@
+<svg:g *ngIf="Series && Series.Data">
+    <svg:g *ngFor="let circle of Series.Data">
+        <svg:g ngc-circle [Style]="Series.Style"
+               [Radius]="circle.Radius"
+               [X]="XScale(circle.X)"
+               [Y]="YScale(circle.Y)"></svg:g>
+    </svg:g>
+</svg:g>

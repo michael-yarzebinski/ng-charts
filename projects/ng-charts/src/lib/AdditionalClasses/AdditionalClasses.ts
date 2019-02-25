@@ -1,7 +1,9 @@
 import { Point } from '../Components/Series/Series.Classes';
 
-export class Dimension extends Point
+export class Dimension implements Point
 {
+    X: number;
+    Y: number;
     Width: number;
     Height: number;
 }

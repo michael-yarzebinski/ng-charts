@@ -1,8 +1,14 @@
 <svg:g [attr.transform]="Transform">
     <svg:g *ngFor="let circle of Series.Data">
-        <svg:g ngc-circle [Style]="Series.SVGStyles"
+        <svg:g ngc-circle [Style]="Series.Style"
                [Radius]="circle.Radius"
                [X]="XScale(circle.X)"
                [Y]="YScale(circle.Y)"></svg:g>
     </svg:g>
+    <svg:g *ngIf="Series.Tooltip.Show" ngc-tooltip-circle
+           [GivenSeries]="Series"
+           [XScale]="XScale"
+           [YScale]="YScale"
+           [MouseOverChart]="MouseOverChart"
+           [TooltipProperties]="Series.Tooltip"></svg:g>
 </svg:g>

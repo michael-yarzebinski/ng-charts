@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { SVGCircle } from '../SVG.Classes';
+import { Component, Input, ElementRef, TemplateRef } from '@angular/core';
+import { Polygon } from '../SVG.Classes';
 
 @Component({
     selector: 'g[ngc-circle]',
@@ -7,9 +7,18 @@ import { SVGCircle } from '../SVG.Classes';
 })
 export class CircleComponent
 {
-    @Input() Style: SVGCircle;
+    @Input() Style: Polygon;
     @Input() Radius: number;
     @Input() X: number;
     @Input() Y: number;
+
+    ngOnInit()
+    {
+        this.update();
+    }
+
+    update()
+    {
+    }
 
 }

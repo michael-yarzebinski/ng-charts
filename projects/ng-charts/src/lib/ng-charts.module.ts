@@ -9,6 +9,7 @@ import { YAxisComponent } from './Components/Axes/YAxis/YAxis.Component';
 import { YAxisTicksComponent } from './Components/Axes/YAxis/YAxis-Ticks.Component';
 import { LineSeries } from './Components/Series/LineSeries/Line-Series.Component'
 import { LineComponent } from './SVG/Line/Line.Component'
+import { CircleSeries } from './Components/Series/CircleSeries/Circle-Series.Component'
 
 import { ScatterChart } from './Charts/Scatter/Scatter-Chart.Component';
 import { ScatterSeries } from './Components/Series/ScatterSeries/Scatter-Series.Component'
@@ -22,10 +23,17 @@ import { LegendComponent } from './Components/Legend/Legend.Component';
 
 import { AreaLineScatterChart } from './Charts/Area-Line-Scatter/Area-Line-Scatter.Component'
 
+
+import { TooltipModule } from './Components/Tooltip/Tooltip.Module';
+
+
+
 @NgModule({
-    declarations: [BaseChartComponent, LineChart, XAxisComponent, XAxisTicksComponent, YAxisComponent, YAxisTicksComponent, LineSeries, LineComponent, ScatterChart, ScatterSeries, CircleComponent, AreaChart, AreaSeries, AreaComponent, LegendComponent, AreaLineScatterChart],
-  imports: [ CommonModule
-  ],
+    declarations: [BaseChartComponent, LineChart, XAxisComponent, XAxisTicksComponent, YAxisComponent, YAxisTicksComponent, LineSeries, LineComponent, ScatterChart, ScatterSeries, CircleComponent, AreaChart, AreaSeries, AreaComponent, LegendComponent, AreaLineScatterChart, CircleSeries],
+    imports: [CommonModule, TooltipModule
+    ],
+    providers: [],
     exports: [BaseChartComponent, LineChart, XAxisComponent, XAxisTicksComponent, YAxisComponent, YAxisTicksComponent, LineSeries, LineComponent, ScatterChart, ScatterSeries, CircleComponent, AreaChart, AreaSeries, AreaComponent, LegendComponent, AreaLineScatterChart],
+    entryComponents: []
 })
 export class NgChartsModule { }
