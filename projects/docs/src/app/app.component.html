@@ -1,20 +1,139 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label for="ChartSelect">Charts:</label>
+                <select class="form-control" id="ChartSelect">
+                    <option>1</option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12">X Axis:</label>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisShow" class="col-sm-4 col-form-label">Show</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" class="form-check" id="XAxisShow" [(ngModel)]="XAxis.Show" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisPosition" class="col-sm-4 col-form-label">Position</label>
+                <div class="col-sm-8">
+                    <select class="form-control" id="XAxisPosition" [(ngModel)]="XAxis.Position">
+                        <option [ngValue]="'Top'">Top</option>
+                        <option [ngValue]="'Bottom'">Bottom</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisMin" class="col-sm-4 col-form-label">Min</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="XAxisMin" [(ngModel)]="XAxis.Min" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisMax" class="col-sm-4 col-form-label">Max</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="XAxisMax" [(ngModel)]="XAxis.Max" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTickCount" class="col-sm-4 col-form-label">Tick Count</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="XAxisTickCount" [(ngModel)]="XAxis.TickCount" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisReverse" class="col-sm-4 col-form-label">Reverse</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" class="form-check" id="XAxisReverse" [(ngModel)]="XAxis.Reverse" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12">X Axis Title Properties</label>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleShow" class="col-sm-4 col-form-label">Show</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" class="form-check" id="XAxisTitleShow" [(ngModel)]="XAxis.Title.Show" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleSpace" class="col-sm-4 col-form-label">Space</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-check" id="XAxisTitleSpace" [(ngModel)]="XAxis.Title.Space" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleText" class="col-sm-4 col-form-label">Text</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-check" id="XAxisTitleText" [(ngModel)]="XAxis.Title.Text" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12">X Axis Title Styling</label>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleFontSize" class="col-sm-4 col-form-label">Font Size</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="XAxisTitleFontSize" [(ngModel)]="XAxis.Title.Style.FontSize" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleFontSize" class="col-sm-4 col-form-label">Fill</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="XAxisTitleFontSize" [(ngModel)]="XAxis.Title.Style.Fill" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleFontSize" class="col-sm-4 col-form-label">Dash</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="XAxisTitleFontSize" [(ngModel)]="XAxis.Title.Style.Dash" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleFontSize" class="col-sm-4 col-form-label">Color</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="XAxisTitleFontSize" [(ngModel)]="XAxis.Title.Style.Color" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="XAxisTitleFontSize" class="col-sm-4 col-form-label">Thickness</label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control" id="XAxisTitleFontSize" [(ngModel)]="XAxis.Title.Style.Thickness" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-12">Axis Properties are the same for both X and Y</label>
+            </div>
 
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-8">
+            <ngc-line-chart *ngIf="ShowPlot" [Width]="600" [Height]="500" [Series]="LineSeriesDatesSeries" [XAxis]="XAxis" [YAxes]="LineSeriesDatesY" [LegendOptions]="LegendOptions"></ngc-line-chart>
+            <ng-template #TooltipTemplate let-data="Data">
+                Big X: {{data.X}}
+                Big Y: {{data.Y}}
+            </ng-template>
+
+
+
+        </div>
+    </div>
+</div>
