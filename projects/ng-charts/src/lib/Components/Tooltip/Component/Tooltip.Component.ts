@@ -27,7 +27,7 @@ import { TooltipProperties } from '../Tooltip.Classes';
 
     SetTooltipPosition()
     {
-        this.Parameters = this.InputParameters;
+        this.Parameters = new TooltipParameters(this.InputParameters);
 
         let itemWidth = this.tooltip.nativeElement.offsetWidth;
         let itemHeight = this.tooltip.nativeElement.offsetHeight;

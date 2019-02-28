@@ -1,5 +1,5 @@
 <svg:g [attr.transform]="Transform">
-    <svg:g *ngFor="let circle of Series.Data">
+    <svg:g *ngFor="let circle of Series.Data" (mousemove)="MouseMoveOverSeries($event)">
         <svg:g ngc-circle [Style]="Series.Style"
                [Radius]="circle.Radius"
                [X]="XScale(circle.X)"

@@ -6,7 +6,7 @@ Excel quality charts on the Web!
 Allows all the customization of an Excel chart with Angular.  Change everything from the titles to tick increments.
 Options include: Grid Line customization, Tick Mark customization, Label customization and much more!
 
-[Demo](https://github.com/yarz-tech/ng-charts.git)
+[Demo](https://yarz-tech.github.io/ng-charts/)
 
 Frequently Updated
 
@@ -17,6 +17,12 @@ Latest version of Angular
 
 
 # Update History
+
+### 0.1.1 (2/28/2019)
+- Features Added
+  - None
+- Bug Fixes
+  -[Issue #2](https://github.com/yarz-tech/ng-charts/issues/2)
 
 ### 0.1.0 (2/25/2019)
 - Features Added

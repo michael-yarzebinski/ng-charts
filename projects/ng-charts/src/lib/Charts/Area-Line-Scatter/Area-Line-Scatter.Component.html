@@ -34,7 +34,8 @@
                        [XScale]="XScale"
                        [YScale]="(series.YAxis == 'Left' ? Y1Scale : Y2Scale)"
                        [Dimensions]="Dimensions" 
-                       [MouseOverChart]="ChartHover"/>
+                       [MouseOverChart]="ChartHover"
+                       (MouseOverSeries)="MouseMoveOverChart($event)"/>
 
             </svg:g>
             <svg:g *ngFor="let series of LineSeries">
@@ -43,7 +44,8 @@
                        [XScale]="XScale"
                        [YScale]="(series.YAxis == 'Left' ? Y1Scale : Y2Scale)"
                        [Dimensions]="Dimensions" 
-                       [MouseOverChart]="ChartHover"/>
+                       [MouseOverChart]="ChartHover"
+                       (MouseOverSeries)="MouseMoveOverChart($event)"/>
             </svg:g>
             <svg:g *ngFor="let series of ScatterSeries">
                 <svg:g ngc-scatter-series
@@ -51,7 +53,8 @@
                        [XScale]="XScale"
                        [YScale]="(series.YAxis == 'Left' ? Y1Scale : Y2Scale)"
                        [Dimensions]="Dimensions" 
-                       [MouseOverChart]="ChartHover"/>
+                       [MouseOverChart]="ChartHover"
+                       (MouseOverSeries)="MouseMoveOverChart($event)"/>
             </svg:g>
         </svg:g>
     </svg:g>

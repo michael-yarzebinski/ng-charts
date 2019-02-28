@@ -36,6 +36,7 @@
                        [YScale]="(series.YAxis == 'Left' ? Y1Scale : Y2Scale)"
                        [Dimensions]="Dimensions"
                        [MouseOverChart]="ChartHover"
+                       (MouseOverSeries)="MouseMoveOverChart($event)"
                        />
 
             </svg:g>

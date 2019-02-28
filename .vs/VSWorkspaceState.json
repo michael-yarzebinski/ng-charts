@@ -3,17 +3,18 @@
     "",
     "\\projects",
     "\\projects\\demo",
-    "\\projects\\demo\\src",
-    "\\projects\\docs",
-    "\\projects\\docs\\src",
     "\\projects\\ng-charts",
     "\\projects\\ng-charts\\src",
     "\\projects\\ng-charts\\src\\lib",
+    "\\projects\\ng-charts\\src\\lib\\Charts",
+    "\\projects\\ng-charts\\src\\lib\\Charts\\Line",
     "\\projects\\ng-charts\\src\\lib\\Components",
-    "\\projects\\ng-charts\\src\\lib\\Components\\Legend",
-    "\\projects\\ng-charts\\src\\lib\\Components\\Series\\LineSeries",
-    "\\projects\\ng-charts\\src\\lib\\Components\\Tooltip\\Container"
+    "\\projects\\ng-charts\\src\\lib\\Components\\Axes",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Axes\\YAxis",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Base",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Tooltip",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Tooltip\\Circles"
   ],
-  "SelectedNode": "\\projects\\docs\\src\\index.html",
+  "SelectedNode": "\\projects\\ng-charts\\src\\lib\\Components\\Axes\\YAxis\\YAxis.Component.ts",
   "PreviewInSolutionExplorer": false
 }

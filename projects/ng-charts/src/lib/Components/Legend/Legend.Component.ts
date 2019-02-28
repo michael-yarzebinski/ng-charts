@@ -116,6 +116,7 @@ export class LegendComponent
             }
             if (i == this.Series.length) {
                 this.HideText = false;
+                console.log(this.Series);
             }
         }
         else {

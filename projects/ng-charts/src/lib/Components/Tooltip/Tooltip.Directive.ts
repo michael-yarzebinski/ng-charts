@@ -23,7 +23,6 @@ export class TooltipDirective implements OnDestroy
             Parameters: this.Parameters,
             Data: this.Data
         });
-
         this.tooltipService.AddTooltipContainerToDOM();
     }
 

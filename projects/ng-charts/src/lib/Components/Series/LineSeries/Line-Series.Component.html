@@ -1,5 +1,5 @@
 <svg:g [attr.transform]="Transform">
-    <svg:g ngc-line [Path]="Path" [Style]="Series.Style"></svg:g>
+    <svg:g ngc-line [Path]="Path" [Style]="Series.Style" (mousemove)="MouseMoveOverSeries($event)"></svg:g>
     <svg:g *ngIf="Series.Tooltip.Show" ngc-tooltip-circle
            [GivenSeries]="Series"
            [XScale]="XScale"

@@ -225,7 +225,7 @@ export class BaseChartClass implements BaseChart
     public ChangeMouseOverChart(Value: boolean, Event:any = null)
     {
         if (Value == false) {   //This allows hovering over paths on the chart.
-            let e = Event.toElement
+            let e = Event.toElement;
             if (e != null && ["circle", "path"].indexOf(e.nodeName) == -1) {
                 this.MouseOverChart = Value;
             }
@@ -245,24 +245,24 @@ export class BaseChartClass implements BaseChart
         let ChartDimensions: Point;
         let ChartLocation: Point
         try {
-            ChartDimensions = {
-                X: Event.path[0].getBoundingClientRect().x,
-                Y: Event.path[0].getBoundingClientRect().y
+            ChartDimensions = { //Used to position the Tooltip on the screen
+                X: Event.path[0].getBoundingClientRect().x + document.documentElement.scrollLeft,   //There is a problem here for the Area series.  The path is incorrect because the parent is the area!
+                Y: Event.path[0].getBoundingClientRect().y + document.documentElement.scrollTop
             }
-            ChartLocation = {
+            ChartLocation = {   //Used to identify which point is closest.
                 X: Event.clientX - Event.path[0].getBoundingClientRect().x,
-                Y: Event.clientY - Event.path[0].getBoundingClientRect().y
+                Y: Event.clientY  - Event.path[0].getBoundingClientRect().y
             }
         }
         catch
         {
             ChartDimensions = {
-                X: Event.srcElement.getBoundingClientRect().left,
-                Y: Event.srcElement.getBoundingClientRect().top
+                X: Event.srcElement.getBoundingClientRect().left + document.documentElement.scrollLeft,
+                Y: Event.srcElement.getBoundingClientRect().top + document.documentElement.scrollTop
             }
             ChartLocation = {
-                X: Event.clientX - Event.srcElement.getBoundingClientRect().left,
-                Y: Event.clientY - Event.srcElement.getBoundingClientRect().top
+                X: Event.clientX  - Event.srcElement.getBoundingClientRect().left,
+                Y: Event.clientY  - Event.srcElement.getBoundingClientRect().top
             }
         }
         this.ChartHover.emit([ChartDimensions, ChartLocation]);

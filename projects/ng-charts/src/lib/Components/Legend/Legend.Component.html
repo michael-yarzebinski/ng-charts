@@ -3,11 +3,11 @@
         <svg:g [id]="'NGCLegendSeries' + i" [attr.transform]="series.LegendTransform">
             <svg:line *ngIf="series.Type == 'Line'"
                       [attr.x1]="0"
-                      [attr.y1]="- LegendOptions.Style.FontSize / 3"
+                      [attr.y1]="- LegendOptions.Style.FontSize / 2"
                       [attr.x2]="LegendOptions.Style.FontSize"
-                      [attr.y2]="- LegendOptions.Style.FontSize / 3"
+                      [attr.y2]="- LegendOptions.Style.FontSize / 2"
                       [attr.stroke]="series.Style.Color"
-                      [attr.stroke-width]="series.Style.Thickness"
+                      [attr.stroke-width]="2"
                       [attr.dash]="series.Style.Dash" />
             <svg:rect *ngIf="series.Type == 'Area'"
                       [attr.x]="0"
@@ -17,7 +17,7 @@
                       [attr.width]="LegendOptions.Style.FontSize"
                       [attr.height]="LegendOptions.Style.FontSize"
                       [attr.stroke]="series.Style.Color"
-                      [attr.stroke-width]="series.Style.Thickness"
+                      [attr.stroke-width]="LegendOptions.Style.Thickness"
                       [attr.fill]="series.Style.Fill" />
             <svg:circle *ngIf="series.Type == 'Scatter'"
                         [attr.cx]="LegendOptions.Style.FontSize / 2"
@@ -32,7 +32,7 @@
                       [attr.stroke-width]="LegendOptions.Style.Thickness"
                       [attr.font-size]="LegendOptions.Style.FontSize"
                       [attr.x]="LegendOptions.Style.FontSize * 3 / 2"
-                      [attr.y]="0">
+                      [attr.y]="(series.Type == 'Scatter' || series.Type == 'Area' ? LegendOptions.Style.FontSize : 0 )">
                 {{series.Name}}
             </svg:text>
         </svg:g>

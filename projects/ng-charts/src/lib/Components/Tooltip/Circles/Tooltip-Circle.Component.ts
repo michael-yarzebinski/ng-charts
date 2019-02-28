@@ -78,6 +78,5 @@ export class TooltipCircle {
         }
         this.MouseLocation = mouseLocation;
         this.ScatterPoint = scatterPoint;
-        //console.log(this.ScatterPoint);
     }
 }

@@ -18,6 +18,12 @@ Latest version of Angular
 
 # Update History
 
+### 0.1.1 (2/28/2019)
+- Features Added
+  - None
+- Bug Fixes
+  -[Issue #2](https://github.com/yarz-tech/ng-charts/issues/2)
+
 ### 0.1.0 (2/25/2019)
 - Features Added
   - Added Hover Overs (customizable)

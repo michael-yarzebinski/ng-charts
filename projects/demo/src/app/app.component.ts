@@ -44,8 +44,9 @@ export class AppComponent {
         LSD1.Show = true;
         LSD1.Style = {
             Color: 'darkgrey',
-            Thickness: 3,
-            Dash: 0
+            Thickness: 20,
+            Dash: 0,
+            Fill: 'darkgrey'
         };
         LSD1.YAxis = 'Left'; 
         LSD1.Data = [
@@ -97,7 +98,8 @@ export class AppComponent {
         LSD2.Style = {
             Color: 'darkblue',
             Thickness: 3,
-            Dash: 0
+            Dash: 0,
+            Fill: 'darkblue'
         };
         LSD2.YAxis = 'Right';
         LSD2.Data = [

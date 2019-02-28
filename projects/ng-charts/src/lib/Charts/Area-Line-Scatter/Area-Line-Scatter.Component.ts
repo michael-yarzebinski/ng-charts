@@ -66,13 +66,13 @@ export class AreaLineScatterChart extends BaseChartClass implements BaseChart
     {
         this.ClipPath = "";
         this.Dimensions = this.CalculateDimensions(this.Width, this.Height, this.XAxis, this.YAxes, this.LegendOptions);
-        this.XScale = this.BuildXScale(this.CombineChartSeries([this.AreaSeries, this.LineSeries, this.ScatterSeries]), this.Dimensions.Plot.Width, this.XAxis.Min, this.XAxis.Max);
+        this.XScale = this.BuildXScale(this.CombineChartSeries([this.AreaSeries, this.LineSeries, this.ScatterSeries]), this.Dimensions.Plot.Width, this.XAxis.Min, this.XAxis.Max, this.XAxis.Reverse);
         console.log(this.XScale);
         if (this.YAxes.find((axis) => axis.Position == 'Left')) {
-            this.Y1Scale = this.BuildYScale([...this.AreaSeries.filter(series => series.YAxis == 'Left'), ...this.LineSeries.filter(series => series.YAxis == 'Left'), ...this.ScatterSeries.filter(series => series.YAxis == 'Left')], this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Left').Min, this.YAxes.find((axis) => axis.Position == 'Left').Max);
+            this.Y1Scale = this.BuildYScale([...this.AreaSeries.filter(series => series.YAxis == 'Left'), ...this.LineSeries.filter(series => series.YAxis == 'Left'), ...this.ScatterSeries.filter(series => series.YAxis == 'Left')], this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Left').Min, this.YAxes.find((axis) => axis.Position == 'Left').Max, this.YAxes.find((axis) => axis.Position == 'Left').Reverse);
         }
         if (this.YAxes.find((axis) => axis.Position == 'Right')) {
-            this.Y2Scale = this.BuildYScale([...this.AreaSeries.filter(series => series.YAxis == 'Right'), ...this.LineSeries.filter(series => series.YAxis == 'Right'), ...this.ScatterSeries.filter(series => series.YAxis == 'Right')], this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Right').Min, this.YAxes.find((axis) => axis.Position == 'Right').Max);
+            this.Y2Scale = this.BuildYScale([...this.AreaSeries.filter(series => series.YAxis == 'Right'), ...this.LineSeries.filter(series => series.YAxis == 'Right'), ...this.ScatterSeries.filter(series => series.YAxis == 'Right')], this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Right').Min, this.YAxes.find((axis) => axis.Position == 'Right').Max, this.YAxes.find((axis) => axis.Position == 'Right').Reverse);
         }
         this.Transform = 'translate(' + this.Dimensions.PlotWAxesALabels.X + "," + this.Dimensions.PlotWAxesALabels.Y + ")";
         this.ClipPath = "url(#PlotClipPath)";

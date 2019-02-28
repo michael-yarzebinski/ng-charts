@@ -1,4 +1,4 @@
-import { Component, Input, KeyValueDiffers, EventEmitter } from '@angular/core';
+import { Component, Input, KeyValueDiffers, EventEmitter, Output } from '@angular/core';
 import { ScatterSeries as Series, Point } from '../Series.Classes';
 
 import { line } from 'd3-shape';
@@ -16,6 +16,8 @@ export class ScatterSeries {
     @Input() YScale: any;
     @Input() Dimensions: Dimensions;
     @Input() MouseOverChart: EventEmitter<Point>;
+
+    @Output() MouseOverSeries: EventEmitter<any> = new EventEmitter<any>();
 
     // #region Differs
     SeriesDiffer: any;
@@ -51,5 +53,9 @@ export class ScatterSeries {
     update() {
         this.Transform = 'translate(' + (this.Dimensions.PlotWAxes.X + this.Dimensions.Plot.X) + ',' + (this.Dimensions.PlotWAxes.Y + this.Dimensions.Plot.Y) + ')';
 
+    }
+
+    MouseMoveOverSeries(Event: any) {
+        this.MouseOverSeries.emit(Event);
     }
 }

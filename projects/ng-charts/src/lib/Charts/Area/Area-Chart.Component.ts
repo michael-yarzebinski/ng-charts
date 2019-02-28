@@ -59,10 +59,10 @@ export class AreaChart extends BaseChartClass implements BaseChart {
         this.Dimensions = this.CalculateDimensions(this.Width, this.Height, this.XAxis, this.YAxes, this.LegendOptions);
         this.XScale = this.BuildXScale(this.Series, this.Dimensions.Plot.Width, this.XAxis.Min, this.XAxis.Max);
         if (this.YAxes.find((axis) => axis.Position == 'Left')) {
-            this.Y1Scale = this.BuildYScale(this.Series.filter(series => series.YAxis == 'Left'), this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Left').Min, this.YAxes.find((axis) => axis.Position == 'Left').Max);
+            this.Y1Scale = this.BuildYScale(this.Series.filter(series => series.YAxis == 'Left'), this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Left').Min, this.YAxes.find((axis) => axis.Position == 'Left').Max, this.YAxes.find((axis) => axis.Position == 'Left').Reverse);
         }
         if (this.YAxes.find((axis) => axis.Position == 'Right')) {
-            this.Y2Scale = this.BuildYScale(this.Series.filter(series => series.YAxis == 'Right'), this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Right').Min, this.YAxes.find((axis) => axis.Position == 'Right').Max);
+            this.Y2Scale = this.BuildYScale(this.Series.filter(series => series.YAxis == 'Right'), this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Right').Min, this.YAxes.find((axis) => axis.Position == 'Right').Max, this.YAxes.find((axis) => axis.Position == 'Right').Reverse);
         }
         this.Transform = 'translate(' + this.Dimensions.PlotWAxesALabels.X + "," + this.Dimensions.PlotWAxesALabels.Y + ")";
         this.ClipPath = "url(#PlotClipPath)";

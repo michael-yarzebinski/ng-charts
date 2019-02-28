@@ -7,6 +7,7 @@ import { TooltipService } from '../Tooltip.Service'
 })
 export class TooltipContainerComponent
 {
-    constructor(public tooltipService: TooltipService) { }
+    constructor(public tooltipService: TooltipService) {
+    }
 
 }

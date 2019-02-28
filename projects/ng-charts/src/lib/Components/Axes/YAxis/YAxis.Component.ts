@@ -43,6 +43,6 @@ export class YAxisComponent {
     update()
     {
         this.Transform = 'translate(' + this.Dimensions.PlotWAxes.X + ',' + this.Dimensions.PlotWAxes.Y + ')';
-        this.Rotate = 'rotate(' + (this.Axis.Position == 'Left' ? '270 ' : '90 ') + (this.Axis.Position == 'Left' ? this.Dimensions.PlotWAxesALabels.X + (this.Dimensions.PlotWAxes.X - this.Dimensions.PlotWAxesALabels.X) / 2 : (this.Dimensions.PlotWAxes.X + this.Dimensions.PlotWAxes.Width) + ((this.Dimensions.PlotWAxesALabels.X + this.Dimensions.PlotWAxesALabels.Width) - (this.Dimensions.PlotWAxes.X + this.Dimensions.PlotWAxes.Width)) / 2) + ',' + (this.Dimensions.Plot.Height / 2) + ')';
+        this.Rotate = 'rotate(' + (this.Axis.Position == 'Left' ? '270 ' : '90 ') + (this.Axis.Position == 'Left' ? this.Dimensions.PlotWAxesALabels.X + (this.Dimensions.PlotWAxes.X - this.Dimensions.PlotWAxesALabels.X) : (this.Dimensions.PlotWAxes.X + this.Dimensions.PlotWAxes.Width) + ((this.Dimensions.PlotWAxesALabels.X + this.Dimensions.PlotWAxesALabels.Width) - (this.Dimensions.PlotWAxes.X + this.Dimensions.PlotWAxes.Width)) / 2) + ',' + (this.Dimensions.Plot.Height / 2) + ')';
     }
 }

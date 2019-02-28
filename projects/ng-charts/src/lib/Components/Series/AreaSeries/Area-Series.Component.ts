@@ -1,4 +1,4 @@
-import { Component, Input, KeyValueDiffers, EventEmitter } from '@angular/core';
+import { Component, Input, KeyValueDiffers, EventEmitter, Output } from '@angular/core';
 import { AreaSeries as Series, Point } from '../Series.Classes';
 
 import { Dimensions } from '../../../AdditionalClasses/AdditionalClasses';
@@ -15,6 +15,8 @@ export class AreaSeries {
     @Input() YScale: any;
     @Input() Dimensions: Dimensions;
     @Input() MouseOverChart: EventEmitter<Point>;
+
+    @Output() MouseOverSeries: EventEmitter<any> = new EventEmitter<any>();
 
     // #region Differs
     SeriesDiffer: any;
@@ -51,5 +53,9 @@ export class AreaSeries {
         this.Path = GenerateAreaPath(this.Series.Data, this.XScale, this.YScale);
         this.Transform = 'translate(' + (this.Dimensions.PlotWAxes.X + this.Dimensions.Plot.X) + ',' + (this.Dimensions.PlotWAxes.Y + this.Dimensions.Plot.Y) + ')';
 
+    }
+
+    MouseMoveOverSeries(Event: any) {
+        this.MouseOverSeries.emit(Event);
     }
 }
