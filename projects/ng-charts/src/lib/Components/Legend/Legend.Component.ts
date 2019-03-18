@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, KeyValueDiffers } from '@angular/core';
 import { AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
 import { LegendOptions } from './Legend.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
@@ -18,8 +18,20 @@ export class LegendComponent
 
     SeriesPosition: any[];
 
+    // #region Differs
+    DimensionsDiffer: any;
+    SeriesDiffer: any;
+    LegendOptionsDiffer: any;
+    // #endregion
+
+    constructor(private _differs: KeyValueDiffers) { }
+
     ngOnInit()
     {
+        this.DimensionsDiffer = this._differs.find(this.Dimensions).create();
+        this.SeriesDiffer = this._differs.find(this.Series).create();
+        this.LegendOptionsDiffer = this._differs.find(this.LegendOptions).create();
+
         this.SeriesPosition = new Array(this.Series.length);
         this.SeriesPosition.fill(0);
         this.update();
@@ -35,10 +47,22 @@ export class LegendComponent
         }, 10);
     }
 
+    ngDoCheck()
+    {
+        if (this._differs)
+        {
+            const changes = this.DimensionsDiffer.diff(this.Dimensions) || this.SeriesDiffer.diff(this.Series) || this.LegendOptionsDiffer.diff(this.LegendOptions);
+            if (changes) {
+                this.update();
+            }
+        }
+    }
+
+
     update()
     {
-        //console.log(this.Series);
-        //this.Transform = this.DetermineTransform();
+        this.DetermineLegendTransform();
+        this.DetermineSeriesTransform();
     }
 
     DetermineLegendTransform(): void
@@ -116,7 +140,6 @@ export class LegendComponent
             }
             if (i == this.Series.length) {
                 this.HideText = false;
-                console.log(this.Series);
             }
         }
         else {

@@ -46,36 +46,36 @@ export class AppComponent {
             Color: 'darkgrey',
             Thickness: 20,
             Dash: 0,
-            Fill: 'darkgrey'
+            //Fill: 'darkgrey'
         };
-        LSD1.YAxis = 'Left'; 
+        LSD1.YAxis = 'Right'; 
         LSD1.Data = [
             {
-                X: 1.5,
+                X: new Date('11/14/1995'),
                 Y:10
             },
             {
-                X: 3,
+                X: new Date('11/14/1996'),
                 Y: 20
             },
             {
-                X: 3.5,
+                X: new Date('11/14/1997'),
                 Y: 30
             },
             {
-                X: 5,
+                X: new Date('11/14/1998'),
                 Y: 40
             },
             {
-                X: 6,
+                X: new Date('11/14/1999'),
                 Y: 50
             },
             {
-                X: 7,
+                X: new Date('11/14/2000'),
                 Y: 60
             },
             {
-                X: 8,
+                X: new Date('11/14/2001'),
                 Y: 70
             }
         ]
@@ -99,38 +99,38 @@ export class AppComponent {
             Color: 'darkblue',
             Thickness: 3,
             Dash: 0,
-            Fill: 'darkblue'
+            //Fill: 'darkblue'
         };
-        LSD2.YAxis = 'Right';
+        LSD2.YAxis = 'Left';
         LSD2.Data = [
             {
-                X: 1,
+                X: new Date('6/14/1995'),
                 Y: 700
             },
             {
-                X: 2,
+                X: new Date('6/14/1997'),
                 Y: 600
             },
             {
-                X: 2.5,
+                X: new Date('8/14/1997'),
                 Y: 500
             },
             {
-                X: 3,
+                X: new Date('6/14/1998'),
                 Y: 400
             },
             {
-                X: 4,
+                X: new Date('6/14/1999'),
                 Y: 50
             },
             {
-                X: 5,
+                X: new Date('6/14/2000'),
                 Y: 300
             },
             {
-                X: 6,
+                X: new Date('6/14/2001'),
                 Y: 200
-            }
+            }, {}
         ]
         LSD2.Tooltip = {
             Show: true,

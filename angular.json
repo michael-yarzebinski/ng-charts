@@ -45,6 +45,7 @@
               "projects/docs/src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "projects/docs/src/styles.css"
             ],
             "scripts": []
@@ -101,6 +102,7 @@
             "tsConfig": "projects/docs/tsconfig.spec.json",
             "karmaConfig": "projects/docs/karma.conf.js",
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "projects/docs/src/styles.css"
             ],
             "scripts": [],

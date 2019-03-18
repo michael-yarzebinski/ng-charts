@@ -1,22 +1,49 @@
 # ng-charts
 [![npm version](https://badge.fury.io/js/%40yarz-tech%2Fng-charts.svg)](https://badge.fury.io/js/%40yarz-tech%2Fng-charts)
 
-Excel quality charts on the Web!  
+Excel quality charts integrated with Angular!
 
-Allows all the customization of an Excel chart with Angular.  Change everything from the titles to tick increments.
-Options include: Grid Line customization, Tick Mark customization, Label customization and much more!
+All the Excel Chart properties you're used to fully integrated with Angular.  We looked at some of the most popular features in customizing an Excel chart and put them into action.  If you're familiar with Excel Charts, this should be a piece of cake (we even used the same naming convention).  Charts are FULLY customizable.  You can literally change any feature you want!
 
-[Demo](https://yarz-tech.github.io/ng-charts/)
+## Features
+### General
+- Full Angular Integration
+- Uses d3 to display nearly everything
+- Strongly typed
+- Multiple types of Series on one plot
+- Multiple Y Axes
+- Customize EVERYTHING!
+- Latest version of Angular
 
-Frequently Updated
+### Chart Types
+- Area
+- Line
+- Scatter
+- Area/Line/Scatter
 
-Latest version of Angular
+For more combinations, just ask!
 
-[npm](https://www.npmjs.com/package/@yarz-tech/ng-charts) 
-[GitHub](https://github.com/yarz-tech/ng-charts)
+### Customization
+- Color, thickness, and dash are customizable for EVERY object.
+- Show/Hide functionality for all objects.
+- Custom spacing of all objects.
 
+For more information check out the following sources:
+- [Demo](https://yarz-tech.github.io/ng-charts/)
+- [GitHub](https://github.com/yarz-tech/ng-charts)
+- [npm](https://www.npmjs.com/package/@yarz-tech/ng-charts) 
 
-# Update History
+## Update History
+
+### 0.1.2 (3/18/2019)
+- Features Added
+  - You can now extend the Point/Scatter Point classes to show additional data in the tooltips.  See docs for more details.
+- Bug Fixes
+  - [Issue 3](https://github.com/yarz-tech/ng-charts/issues/3)
+  - [Issue 4](https://github.com/yarz-tech/ng-charts/issues/4) This is hard to test so hopefully this will fix it.
+  - [Issue 5](https://github.com/yarz-tech/ng-charts/issues/5)
+  - [Issue 6](https://github.com/yarz-tech/ng-charts/issues/6)
+
 
 ### 0.1.1 (2/28/2019)
 - Features Added

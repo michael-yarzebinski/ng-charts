@@ -129,7 +129,7 @@
             <div class="row" style="height: 50px;">
 
             </div>
-            <ngc-area-chart *ngIf="ShowPlot" [Width]="600" [Height]="500" [Series]="LineSeriesDatesSeries" [XAxis]="XAxis" [YAxes]="LineSeriesDatesY" [LegendOptions]="LegendOptions"></ngc-area-chart>
+            <ngc-line-chart *ngIf="ShowPlot" [Width]="600" [Height]="500" [Series]="LineSeriesDatesSeries" [XAxis]="XAxis" [YAxes]="LineSeriesDatesY" [LegendOptions]="LegendOptions"></ngc-line-chart>
             <ng-template #TooltipTemplate let-data="Data">
                 Big X: {{data.X}}
                 Big Y: {{data.Y}}

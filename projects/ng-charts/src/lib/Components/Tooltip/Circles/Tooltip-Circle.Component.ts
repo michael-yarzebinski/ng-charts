@@ -47,22 +47,13 @@ export class TooltipCircle {
                     {
                         if (this.XScale(point.X) - MouseEvent[1].X < PositionDifference) //The current point is closer to the mouse than the last.
                         {
-                            scatterPoint = {
-                                X: point.X,
-                                Y: point.Y,
-                                Radius: this.GivenSeries.Style.Thickness * 2,
-                            }
+                            scatterPoint = { ...point, Radius: this.GivenSeries.Style.Thickness * 2 };
                         }
                         break;
                     }
 
                     PositionDifference = MouseEvent[1].X - this.XScale(point.X);
-
-                    scatterPoint = {
-                        X: point.X,
-                        Y: point.Y,
-                        Radius: this.GivenSeries.Style.Thickness * 2,
-                    }
+                    scatterPoint = { ...point, Radius: this.GivenSeries.Style.Thickness * 2 };
                 }
             }
 

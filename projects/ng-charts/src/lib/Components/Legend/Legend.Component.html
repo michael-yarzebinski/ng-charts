@@ -3,9 +3,9 @@
         <svg:g [id]="'NGCLegendSeries' + i" [attr.transform]="series.LegendTransform">
             <svg:line *ngIf="series.Type == 'Line'"
                       [attr.x1]="0"
-                      [attr.y1]="- LegendOptions.Style.FontSize / 2"
+                      [attr.y1]="LegendOptions.Style.FontSize / 2"
                       [attr.x2]="LegendOptions.Style.FontSize"
-                      [attr.y2]="- LegendOptions.Style.FontSize / 2"
+                      [attr.y2]="LegendOptions.Style.FontSize / 2"
                       [attr.stroke]="series.Style.Color"
                       [attr.stroke-width]="2"
                       [attr.dash]="series.Style.Dash" />
@@ -32,7 +32,7 @@
                       [attr.stroke-width]="LegendOptions.Style.Thickness"
                       [attr.font-size]="LegendOptions.Style.FontSize"
                       [attr.x]="LegendOptions.Style.FontSize * 3 / 2"
-                      [attr.y]="(series.Type == 'Scatter' || series.Type == 'Area' ? LegendOptions.Style.FontSize : 0 )">
+                      [attr.y]="LegendOptions.Style.FontSize">
                 {{series.Name}}
             </svg:text>
         </svg:g>

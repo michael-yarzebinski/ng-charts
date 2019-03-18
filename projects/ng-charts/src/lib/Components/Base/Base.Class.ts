@@ -245,9 +245,10 @@ export class BaseChartClass implements BaseChart
         let ChartDimensions: Point;
         let ChartLocation: Point
         try {
+            let EventPath = (Event.path[0].nodeName == "rect" ? Event.path[0] : Event.path[5]);
             ChartDimensions = { //Used to position the Tooltip on the screen
-                X: Event.path[0].getBoundingClientRect().x + document.documentElement.scrollLeft,   //There is a problem here for the Area series.  The path is incorrect because the parent is the area!
-                Y: Event.path[0].getBoundingClientRect().y + document.documentElement.scrollTop
+                X: EventPath.getBoundingClientRect().x + document.documentElement.scrollLeft,   //There is a problem here for the Area series.  The path is incorrect because the parent is the area!
+                Y: EventPath.getBoundingClientRect().y + document.documentElement.scrollTop
             }
             ChartLocation = {   //Used to identify which point is closest.
                 X: Event.clientX - Event.path[0].getBoundingClientRect().x,
