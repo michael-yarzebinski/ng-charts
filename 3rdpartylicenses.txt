@@ -273,6 +273,12 @@ MIT
 @angular/common
 MIT
 
+@angular/platform-browser
+MIT
+
+@angular/router
+MIT
+
 d3-path
 BSD-3-Clause
 Copyright 2015-2016 Mike Bostock
@@ -582,9 +588,6 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-@angular/platform-browser
-MIT
 
 @angular/forms
 MIT
