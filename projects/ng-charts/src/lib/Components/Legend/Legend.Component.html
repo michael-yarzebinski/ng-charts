@@ -1,6 +1,6 @@
-<svg:g [attr.transform]="Transform" id="NGCLegend">
+<svg:g [attr.transform]="Transform" #NGCLegend>
     <svg:g *ngFor="let series of Series; index as i" [attr.visibility]="(HideText ? 'hidden' : 'visible')">
-        <svg:g [id]="'NGCLegendSeries' + i" [attr.transform]="series.LegendTransform">
+        <svg:g #NGCLegendSeries [id]="'NGCLegendSeries' + i" [attr.transform]="series.LegendTransform">
             <svg:line *ngIf="series.Type == 'Line'"
                       [attr.x1]="0"
                       [attr.y1]="LegendOptions.Style.FontSize / 2"

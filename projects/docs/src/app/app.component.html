@@ -1,4 +1,29 @@
-<div class="container-fluid">
+<div class="jumbotron jumbotron-fluid" style="margin:0">
+    <div class="container">
+        <h1 class="display-4">@yarz-tech/ng-charts</h1>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="https://github.com/yarz-tech/ng-charts" target="_blank"><span class="fa fa-github"></span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="Docs" routerLinkActive="active">Docs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="Demo" routerLinkActive="active">Demo</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>
+
+<!--<ngc-docs></ngc-docs>-->
+
+<!--<div class="container-fluid">
     <div class="row">
         <div class="col-3">
             <div class="form-group">
@@ -126,7 +151,6 @@
 
 
         <div class="col-8">
-            <!--<ngc-line-chart *ngIf="ShowPlot" [Width]="600" [Height]="500" [Series]="LineSeriesDatesSeries" [XAxis]="XAxis" [YAxes]="LineSeriesDatesY" [LegendOptions]="LegendOptions"></ngc-line-chart>-->
             <ng-template #TooltipTemplate let-data="Data">
                 Big X: {{data.X}}
                 Big Y: {{data.Y}}
@@ -146,4 +170,4 @@
 
         </div>
     </div>
-</div>
+</div>-->

@@ -35,6 +35,7 @@ export class AreaLineScatterChart extends BaseChartClass implements BaseChart
     Y1Scale: any;
     Y2Scale: any;
     ClipPath: string;
+    ClipPathID: number;
 
     constructor(private _differs: KeyValueDiffers) {
         super();
@@ -42,6 +43,7 @@ export class AreaLineScatterChart extends BaseChartClass implements BaseChart
 
     ngOnInit()
     {
+        this.ClipPathID = Math.random() * 10000;    //Generate a random number for the clip path ID.  This causes problems when multiple plots are on the same screen.
         this.LegendOptionsDiffer = this._differs.find(this.LegendOptions).create();
         this.AreaSeriesDiffer = this._differs.find(this.AreaSeries).create();
         this.LineSeriesDiffer = this._differs.find(this.LineSeries).create();
@@ -75,6 +77,6 @@ export class AreaLineScatterChart extends BaseChartClass implements BaseChart
             this.Y2Scale = this.BuildYScale([...this.AreaSeries.filter(series => series.YAxis == 'Right'), ...this.LineSeries.filter(series => series.YAxis == 'Right'), ...this.ScatterSeries.filter(series => series.YAxis == 'Right')], this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Right').Min, this.YAxes.find((axis) => axis.Position == 'Right').Max, this.YAxes.find((axis) => axis.Position == 'Right').Reverse);
         }
         this.Transform = 'translate(' + this.Dimensions.PlotWAxesALabels.X + "," + this.Dimensions.PlotWAxesALabels.Y + ")";
-        this.ClipPath = "url(#PlotClipPath)";
+        this.ClipPath = "url(#PlotClipPath"+this.ClipPathID+")";
     }
 }

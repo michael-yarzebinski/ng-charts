@@ -8,7 +8,7 @@
         </svg:g>
         <!--Clip Path-->
         <svg:defs>
-            <svg:clipPath id="PlotClipPath">
+            <svg:clipPath [id]="'PlotClipPath' + ClipPathID">
                 <svg:rect [attr.width]="Dimensions.Plot.Width"
                           [attr.height]="Dimensions.Plot.Height"
                           [attr.x]="Dimensions.PlotWAxes.X + Dimensions.Plot.X"

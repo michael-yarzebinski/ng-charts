@@ -46,7 +46,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "projects/docs/src/styles.css"
+              "projects/docs/src/styles.scss"
             ],
             "scripts": []
           },

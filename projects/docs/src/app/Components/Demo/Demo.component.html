@@ -110,31 +110,22 @@
 
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-8">
-            <div class="row" style="height: 50px;">
-
-            </div>
-            <ngc-line-chart *ngIf="ShowPlot" [Width]="600" [Height]="500" [Series]="LineSeriesDatesSeries" [XAxis]="XAxis" [YAxes]="LineSeriesDatesY" [LegendOptions]="LegendOptions"></ngc-line-chart>
             <ng-template #TooltipTemplate let-data="Data">
                 Big X: {{data.X}}
                 Big Y: {{data.Y}}
             </ng-template>
-
+            <ng-template #ASTooltipTemplate let-data="Data">
+                Expected Production: {{data.Y}}
+            </ng-template>
+            <ng-template #LSTooltipTemplate let-data="Data">
+                Actual Production: {{data.Y}}
+            </ng-template>
+            <ng-template #SSTooltipTemplate let-data="Data">
+                Delay Hours: {{data.X}} <br />
+                Reason: {{data.Info}}
+            </ng-template>
+            <ngc-area-line-scatter-chart *ngIf="ShowPlot" [Width]="600" [Height]="500" [AreaSeries]="AreaSeries" [LineSeries]="LineSeries" [ScatterSeries]="ScatterSeries" [XAxis]="XAxis" [YAxes]="YAxes" [LegendOptions]="LegendOptions"></ngc-area-line-scatter-chart>
 
 
         </div>

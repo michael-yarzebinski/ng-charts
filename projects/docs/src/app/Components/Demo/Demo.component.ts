@@ -1,19 +1,16 @@
 import { Component, AfterViewInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { AreaSeries, LineSeries, ScatterSeries } from 'projects/ng-charts/src/lib/Components/Series/Series.Classes';
 import { Line, Polygon } from 'projects/ng-charts/src/lib/SVG/SVG.Classes';
-import { Axis } from '../../../ng-charts/src/lib/Components/Axes/Axes.Classes'
-import { BuildDefaultAxis, BuildDefaultLegend, BuildDefaultSeries } from '../../../ng-charts/src/lib/BuildDefaults'
-import { Point, ScatterPoint } from '../../../ng-charts/src/lib/Components/Series/Series.Classes';
+import { Axis } from '../../../../../ng-charts/src/lib/Components/Axes/Axes.Classes'
+import { BuildDefaultAxis, BuildDefaultLegend, BuildDefaultSeries } from '../../../../../ng-charts/src/lib/BuildDefaults'
+import { Point, ScatterPoint } from '../../../../../ng-charts/src/lib/Components/Series/Series.Classes';
 import { LegendOptions } from 'projects/ng-charts/src/lib/Components/Legend/Legend.Classes';
-//import { BuildDefaultSeries } from '../../../ng-charts/src/lib/BuildDefaults'
-//import { ScatterPoint } from 'ng-charts/public_api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'demo',
+    templateUrl: './Demo.component.html',
 })
-export class AppComponent {
+export class DemoComponent {
     ShowPlot = false;
 
     LineSeriesDatesSeries: LineSeries[] = [];
@@ -31,8 +28,7 @@ export class AppComponent {
     @ViewChild('LSTooltipTemplate') LineSeriesTooltipTemplate: TemplateRef<ElementRef>;
     @ViewChild('SSTooltipTemplate') ScatterSeriesTooltipTemplate: TemplateRef<ElementRef>;
 
-    ngOnInit()
-    {
+    ngOnInit() {
         this.LegendOptions = {
 
             Orientation: 'Horizontal',
@@ -43,7 +39,7 @@ export class AppComponent {
                 Color: 'Black',
                 Thickness: 0.01,
                 Fill: 'black',
-                Dash : 0
+                Dash: 0
             }
         }
 
@@ -168,7 +164,7 @@ export class AppComponent {
             //},
             {
                 X: 2,
-                Y:2
+                Y: 2
             },
             {
                 X: 3,
@@ -208,7 +204,7 @@ export class AppComponent {
         let LS1D: Point[] = [
             {
                 X: 1,
-                Y:1
+                Y: 1
             },
             {
                 X: 2,
@@ -248,7 +244,7 @@ export class AppComponent {
             },
 
         ]
-        let LS1 : any = BuildDefaultSeries("Actual Production", LS1D, "Left", "Line", "Green");
+        let LS1: any = BuildDefaultSeries("Actual Production", LS1D, "Left", "Line", "Green");
         this.LineSeries.push(LS1);
         let SS1D: ExtendedPoint[] = [
             {
@@ -288,16 +284,14 @@ export class AppComponent {
         this.ShowPlot = true;
     }
 
-    ngAfterViewInit()
-    {
+    ngAfterViewInit() {
         this.AreaSeries[0].Tooltip.Template = this.AreaSeriesTooltipTemplate;
         this.LineSeries[0].Tooltip.Template = this.LineSeriesTooltipTemplate;
         this.ScatterSeries[0].Tooltip.Template = this.ScatterSeriesTooltipTemplate;
     }
 }
 
-interface ExtendedPoint extends ScatterPoint
-{
+interface ExtendedPoint extends ScatterPoint {
     X: any;
     Y: any;
     Radius: any;

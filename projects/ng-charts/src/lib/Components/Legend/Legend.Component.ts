@@ -1,7 +1,8 @@
-import { Component, Input, AfterViewInit, KeyValueDiffers } from '@angular/core';
+import { Component, Input, AfterViewInit, KeyValueDiffers, ViewChild, ViewChildren, TemplateRef, ElementRef, QueryList } from '@angular/core';
 import { AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
 import { LegendOptions } from './Legend.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
+import { Template } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
     selector: 'g[ngc-legend]',
@@ -18,11 +19,17 @@ export class LegendComponent
 
     SeriesPosition: any[];
 
+    @ViewChild('NGCLegend') NGCLegend : any;
+    @ViewChildren('NGCLegendSeries') SVGElements: QueryList<ElementRef>;
+
+
     // #region Differs
     DimensionsDiffer: any;
     SeriesDiffer: any;
     LegendOptionsDiffer: any;
     // #endregion
+
+
 
     constructor(private _differs: KeyValueDiffers) { }
 
@@ -67,11 +74,10 @@ export class LegendComponent
 
     DetermineLegendTransform(): void
     {
-        let svg: any = document.getElementById('NGCLegend');
-        if (svg != null)
+        if (this.NGCLegend && this.NGCLegend.nativeElement)
         {
+            let svg = this.NGCLegend.nativeElement;
             let legendSizing = svg.getBoundingClientRect();
-            
             let actualX;
 
             if (this.LegendOptions.Position == 'Top' || this.LegendOptions.Position == 'Bottom') {
@@ -115,7 +121,6 @@ export class LegendComponent
             else {
                 relativeX = 0;
             }
-
             this.Transform = 'translate(' + (actualX + relativeX) + ',' + (actualY + relativeY) + ')';
 
             this.HideText = false;
@@ -125,26 +130,33 @@ export class LegendComponent
 
     DetermineSeriesTransform()
     {
-        if (this.LegendOptions.Orientation == 'Horizontal') {
-            let totalWidth = 0;
-            let i = 0;
-            for (; i < this.Series.length; i++) {
-                let svg: any = document.getElementById('NGCLegendSeries' + i);
-                if (svg != null) {
-                    this.Series[i].LegendTransform = 'translate(' + totalWidth + ',0)';
-                    totalWidth += svg.getBBox().width + this.LegendOptions.Style.FontSize / 4;
+        if (this.SVGElements && this.SVGElements.length > 0) {
+            if (this.LegendOptions.Orientation == 'Horizontal') {
+                let totalWidth = 0;
+                let i = 0;
+                for (; i < this.Series.length; i++) {
+                    let svg: any = this.SVGElements.find((element) => {
+                        if (element.nativeElement.id.indexOf(i) > -1) {
+                            return true;
+                        }
+                        return false;
+                    }).nativeElement;
+                    if (svg != null) {
+                        this.Series[i].LegendTransform = 'translate(' + totalWidth + ',0)';
+                        totalWidth += svg.getBBox().width + this.LegendOptions.Style.FontSize / 4;
+                    }
+                    else {
+                        break;
+                    }
                 }
-                else {
-                    break;
+                if (i == this.Series.length) {
+                    this.HideText = false;
                 }
             }
-            if (i == this.Series.length) {
-                this.HideText = false;
-            }
-        }
-        else {
-            for (let i = 0; i < this.Series.length; i++) {
-                this.Series[i].LegendTransform = 'translate(0,' + 1.5 * this.LegendOptions.Style.FontSize * i + ')';
+            else {
+                for (let i = 0; i < this.Series.length; i++) {
+                    this.Series[i].LegendTransform = 'translate(0,' + 1.5 * this.LegendOptions.Style.FontSize * i + ')';
+                }
             }
         }
     }

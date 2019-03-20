@@ -14,6 +14,7 @@ All the Excel Chart properties you're used to fully integrated with Angular.  We
 - Multiple Y Axes
 - Customize EVERYTHING!
 - Latest version of Angular
+- Tested in Chrome and IE 11.
 
 ### Chart Types
 - Area
@@ -29,11 +30,20 @@ For more combinations, just ask!
 - Custom spacing of all objects.
 
 For more information check out the following sources:
-- [Demo](https://yarz-tech.github.io/ng-charts/)
+- [Docs](https://yarz-tech.github.io/ng-charts/Docs)
+- [Demo](https://yarz-tech.github.io/ng-charts/Demo)
 - [GitHub](https://github.com/yarz-tech/ng-charts)
 - [npm](https://www.npmjs.com/package/@yarz-tech/ng-charts) 
 
 ## Update History
+
+### 0.1.3 (3/20/2019)
+- Features Added
+  - None
+- Bug Fixes
+  - [Issue 4](https://github.com/yarz-tech/ng-charts/issues/4) Only happened when multiple charts were on the same page.
+  - [Issue 6](https://github.com/yarz-tech/ng-charts/issues/6) Fixed for Chrome.  Still exploring a solution for IE.
+  - [Issue 7](https://github.com/yarz-tech/ng-charts/issues/7)
 
 ### 0.1.2 (3/18/2019)
 - Features Added

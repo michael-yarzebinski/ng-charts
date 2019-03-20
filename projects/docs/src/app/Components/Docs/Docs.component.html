@@ -1,0 +1,1111 @@
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-2" >
+            <ul class="nav nav-pills flex-column" [ngStyle]="{position: GoSticky ? 'fixed' : '', top: GoSticky ? '0px' : ''}">
+                <li class="nav-item">
+                    <span (click)="scrollTo('Classes')" class="nav-link clickable">Classes</span>
+                    <ul>
+                        <li class="nav-item">
+                            <span (click)="scrollTo('SVGClasses')" class="nav-link clickable">SVG Classes</span>
+                            <ul>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Base')" class="nav-link clickable">Base</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Line')" class="nav-link clickable">Line</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Polygon')" class="nav-link clickable">Polygon</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Text')" class="nav-link clickable">Text</span>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <span (click)="scrollTo('AxisClasses')" class="nav-link clickable">Axis Classes</span>
+                            <ul>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Title')" class="nav-link clickable">Title</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('TickMarks')" class="nav-link clickable">Tick Marks</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Labels')" class="nav-link clickable">Labels</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('GridLines')" class="nav-link clickable">Grid Lines</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Axis')" class="nav-link clickable">Axis</span>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <span (click)="scrollTo('SeriesClasses')" class="nav-link clickable">Series Classes</span>
+                            <ul>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Point')" class="nav-link clickable">Point</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('ScatterPoint')" class="nav-link clickable">Scatter Point</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('TooltipProperties')" class="nav-link clickable">Tooltip Properties</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('Series')" class="nav-link clickable">Series</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <span (click)="scrollTo('Charts')" class="nav-link clickable">Charts</span>
+                    <ul>
+                        <li class="nav-item">
+                            <span (click)="scrollTo('SingleChart')" class="nav-link clickable">Single Chart</span>
+                            <ul>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('AreaLineOrScatter')" class="nav-link clickable">Area, Line, or Scatter</span>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <span (click)="scrollTo('CombineCharts')" class="nav-link clickable">Combine Chart</span>
+                            <ul>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('AreaLineAndScatter')" class="nav-link clickable">Area, Line, and Scatter</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <span (click)="scrollTo('HelpfulFunctions')" class="nav-link clickable">Helpful Functions</span>
+                    <ul>
+                        <li class="nav-item">
+                            <span (click)="scrollTo('BuildDefaults')" class="nav-link clickable">Build Defaults</span>
+                            <ul>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('BuildDefaultAxis')" class="nav-link clickable">Build Default Axis</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('BuildDefaultSeries')" class="nav-link clickable">Build Default Series</span>
+                                </li>
+                                <li class="nav-item">
+                                    <span (click)="scrollTo('BuildDefaultLegend')" class="nav-link clickable">Build Default Legend</span>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-7">
+            <div class="container-fluid">
+                <div class="row" id="Classes">
+                    <div class="col-12">
+                        <h2>Classes</h2>
+                    </div>
+                </div>
+
+                <div class="row" id="SVGClasses">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>SVG Classes</h4>
+                            </div>
+                        </div>
+                        <div class="row" id="Base">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Base</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Color</td>
+                                                        <td>string</td>
+                                                        <td>Stroke of SVG Element.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thickness</td>
+                                                        <td>number</td>
+                                                        <td>Stroke Thickness of SVG Element.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"  id="Line">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Line (extends Base)</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Dash</td>
+                                                        <td>number</td>
+                                                        <td>The SVG Dash attribute for any line.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Polygon">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Polygon (extends Line)</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Fill</td>
+                                                        <td>string</td>
+                                                        <td>The SVG Dash attribute for any line.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Text">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Text (extends Polygon)</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Font Size</td>
+                                                        <td>number</td>
+                                                        <td>The font size of SVG Text.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row"  id="AxisClasses">
+                            <div class="col-12">
+                                <h4>Axis Classes</h4>
+                            </div>
+                        </div>
+                        <div class="row" id="Title">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Title</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Determines whether the Axis Title is shown or not.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Style</td>
+                                                        <td>Text</td>
+                                                        <td>Determines the styling of the Axis Title.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Space</td>
+                                                        <td>number</td>
+                                                        <td>How wide/tall (depending on orientation) the Axis Title box is.  This allows for custom spacing.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Text</td>
+                                                        <td>string</td>
+                                                        <td>The Axis Title.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="TickMarks">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Tick Marks</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Determines whether the Tick Marks are shown or not.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Style</td>
+                                                        <td>Line</td>
+                                                        <td>Determines the styling of the Tick Marks.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Size</td>
+                                                        <td>number</td>
+                                                        <td>How wide/tall (depending on orientation) the Tick Marks are.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Labels">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Labels</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Determines whether the Labels are shown or not.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Style</td>
+                                                        <td>Text</td>
+                                                        <td>Determines the styling of the Labels.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Space</td>
+                                                        <td>number</td>
+                                                        <td>How wide/tall (depending on orientation) the Label boxes are.  This allows for custom spacing.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Format</td>
+                                                        <td>Function</td>
+                                                        <td>Each label will be passed through this function.  This allows for custom label formats.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="GridLines">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Grid Lines</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Determines whether the Grid Lines are shown or not.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Style</td>
+                                                        <td>Line</td>
+                                                        <td>Determines the styling of the Grid Lines.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Axis">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Axis</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Determines whether the Axis is shown or not.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Position</td>
+                                                        <td>Left, Right, Top, or Bottom</td>
+                                                        <td>Determines the position of the Axis.  It is up to the users to use them properly (X Axis is Top or Bottom, Y Axis is Left or Right).</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Title</td>
+                                                        <td>Title</td>
+                                                        <td>Information about the Title.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Grid Lines</td>
+                                                        <td>Grid Lines</td>
+                                                        <td>Information about the Grid Lines.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tick Marks</td>
+                                                        <td>Tick Marks</td>
+                                                        <td>Information about the Tick Marks.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Labels</td>
+                                                        <td>Labels</td>
+                                                        <td>Information about the Labels.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Min</td>
+                                                        <td>any</td>
+                                                        <td>The minimum value associated with the Axis.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Max</td>
+                                                        <td>any</td>
+                                                        <td>The maximum value associated with the Axis.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tick Count</td>
+                                                        <td>number</td>
+                                                        <td>Number of Ticks on the Axis.  d3 does it's best to accomidate to this.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Reverse</td>
+                                                        <td>boolean</td>
+                                                        <td>Whether the axis is ascending or descending.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row" id="SeriesClasses">
+                            <div class="col-12">
+                                <h4>Series Classes</h4>
+                            </div>
+                        </div>
+
+                        <div class="row" id="Point">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Point</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>X</td>
+                                                        <td>any</td>
+                                                        <td>X value of a Point on a graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Y</td>
+                                                        <td>any</td>
+                                                        <td>Y value of a Point on a graph.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="ScatterPoint">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Scatter Point (extends Point)</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Radius</td>
+                                                        <td>any</td>
+                                                        <td>Radius of a Scatter Point on a graph.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="TooltipProperties">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Tooltip Properties</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Template</td>
+                                                        <td>TemplateRef&lt;ElementRef&gt;</td>
+                                                        <td>Template to be used for Tooltips.  Note: You may extend the Point/Scatter Point classes to provide additional information in the Tooltip.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Whether to display the Tooltip or not.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Style</td>
+                                                        <td>Polygon</td>
+                                                        <td>Styling of the Tooltip.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CustomClass</td>
+                                                        <td>string</td>
+                                                        <td>Apply a Custom Class to the Tooltip.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Position</td>
+                                                        <td>Top, Left, Right, or Bottom</td>
+                                                        <td>Where the Tooltip should be placed.  If one is not provided, the best position will be determined (default is Top).</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Series">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Series</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <td>string</td>
+                                                        <td>Name of the series.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Data</td>
+                                                        <td>Array of Points of Scatter Points</td>
+                                                        <td>Data associated with a given series.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Y Axis</td>
+                                                        <td>Left or Right</td>
+                                                        <td>Which Y Axis the Series corresponds to.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Type</td>
+                                                        <td>Area, Line, or Scatter</td>
+                                                        <td>Read Only property.  Set in constructor.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Style</td>
+                                                        <td>Line or Polygon</td>
+                                                        <td>Information about the coloring of the SVG Line or SVG Path.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Show</td>
+                                                        <td>boolean</td>
+                                                        <td>Determines if the Series should be displayed.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tooltip</td>
+                                                        <td>Tooltip Properties</td>
+                                                        <td>Information about the Tooltip for the given Series.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Legend Transform</td>
+                                                        <td>string</td>
+                                                        <td>This is used to position the Series in the Legend.  Any string provided will be overwritten.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>Area, Line, and Scatter Series all implement the Series interface and set appropriate properties in constructor.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row" id="LegendClasses">
+                            <div class="col-12">
+                                <h4>Legend Classes</h4>
+                            </div>
+                        </div>
+                        <div class="row" id="LegendOptions">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Legend Options</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Space</td>
+                                                        <td>number</td>
+                                                        <td>How wide/tall (depending on orientation) the Legend box is.  This allows for custom spacing.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Position</td>
+                                                        <td>Top, Left, Right, or Bottom</td>
+                                                        <td>Where the Legend is placed relative to the graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Orientation</td>
+                                                        <td>Horizontal or Vertical</td>
+                                                        <td>How the different Series are displayed.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="container-fluid">
+                <div class="row" id="Charts">
+                    <div class="col-12">
+                        <h2>Charts</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row" id="SingleChart">
+                            <div class="col-12">
+                                <h4>Single Chart </h4>
+                            </div>
+                        </div>
+
+                        <div class="row"  id="AreaLineOrScatter">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Area, Line, or Scatter</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Legend Options</td>
+                                                        <td>Legend Options</td>
+                                                        <td>Legend Options for the graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Series</td>
+                                                        <td>Array of Area, Line, or Scatter Series.</td>
+                                                        <td>Series to display on the graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>X Axis</td>
+                                                        <td>Axis</td>
+                                                        <td>X Axis to be displayed on the graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>YAxes</td>
+                                                        <td>Array of type Axis</td>
+                                                        <td>Y Axes to display on graph.  This allows for two Y Axes.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Width</td>
+                                                        <td>number</td>
+                                                        <td>Width of the entire chart (including Legend).</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Height</td>
+                                                        <td>number</td>
+                                                        <td>Height of the entire chart (including Legend).</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row" id="CombineCharts">
+                            <div class="col-12">
+                                <h4>Combine Chart </h4>
+                            </div>
+                        </div>
+
+                        <div class="row" id="AreaLineAndScatter">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Area, Line, and Scatter Combinations</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Legend Options</td>
+                                                        <td>Legend Options</td>
+                                                        <td>Legend Options for the graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Area Series, Line Series, Scatter Series</td>
+                                                        <td>Array of Area, Line, or Scatter Series.</td>
+                                                        <td>Series to display on the graph.  Ex for the Area, Line, Scatter plot: [AreaSeries]="[AreaSeries1, AreaSeries2]" [LineSeries]="[LineSeries1, LineSeries2]" [ScatterSeries]="[ScatterSeries1, ScatterSeries2]"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>X Axis</td>
+                                                        <td>Axis</td>
+                                                        <td>X Axis to be displayed on the graph.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>YAxes</td>
+                                                        <td>Array of type Axis</td>
+                                                        <td>Y Axes to display on graph.  This allows for two Y Axes.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Width</td>
+                                                        <td>number</td>
+                                                        <td>Width of the entire chart (including Legend).</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Height</td>
+                                                        <td>number</td>
+                                                        <td>Height of the entire chart (including Legend).</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-3"></div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row" id="HelpfulFunctions">
+                    <div class="col-12">
+                        <h2>Helpful Functions</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row"  id="BuildDefaults">
+                            <div class="col-12">
+                                <h4>Build Defaults</h4>
+                            </div>
+                        </div>
+
+                        <div class="row"  id="BuildDefaultAxis">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Build Default Axis</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Title</td>
+                                                        <td>string</td>
+                                                        <td>Title of the Axis.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Color</td>
+                                                        <td>string</td>
+                                                        <td>Applies the Color to the Color and Fill properties of the Title, Labels, and Tick Marks.  Still uses light grey for grid lines.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Position</td>
+                                                        <td>Left, Right, Top, or Bottom</td>
+                                                        <td>Applies to the Position property of the Axis.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>POrS (Primary or Secondary)</td>
+                                                        <td>Primary of Secondary</td>
+                                                        <td>Primary shows the Grid Lines, Secondary shows the Tick Marks.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"  id="BuildDefaultSeries">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Build Default Series</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <td>string</td>
+                                                        <td>Name of the Series.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Data</td>
+                                                        <td>Array of any</td>
+                                                        <td>Sets the Data property of the Series.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Y Axis</td>
+                                                        <td>Left or Right</td>
+                                                        <td>Sets the Y Axis property of the Series.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Type</td>
+                                                        <td>Area, Line, or Scatter</td>
+                                                        <td>Determines what type of series to build.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Color</td>
+                                                        <td>string</td>
+                                                        <td>Applies the Color to the Color and Fill properties of the Style and Tooltip.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"  id="BuildDefaultLegend">
+                            <div class="col-1"></div>
+                            <div class="col-11">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5>Build Default Legend</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Property</th>
+                                                        <th>Type</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Position</td>
+                                                        <td>Top, Left, Right, or Bottom</td>
+                                                        <td>Sets the Position property of Legend Options.</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Orientation</td>
+                                                        <td>Horizontal or Vertical</td>
+                                                        <td>Sets the Orientation property of Legend Options.  Also sets a default for Space property.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

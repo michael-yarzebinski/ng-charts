@@ -251,8 +251,8 @@ export class BaseChartClass implements BaseChart
                 Y: EventPath.getBoundingClientRect().y + document.documentElement.scrollTop
             }
             ChartLocation = {   //Used to identify which point is closest.
-                X: Event.clientX - Event.path[0].getBoundingClientRect().x,
-                Y: Event.clientY  - Event.path[0].getBoundingClientRect().y
+                X: Event.clientX - EventPath.getBoundingClientRect().x,
+                Y: Event.clientY - EventPath.getBoundingClientRect().y
             }
         }
         catch
