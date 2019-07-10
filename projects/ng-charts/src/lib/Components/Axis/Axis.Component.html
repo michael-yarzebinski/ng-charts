@@ -1,0 +1,32 @@
+<svg:g *ngIf="Axis.Show">
+    <svg:g *ngIf="Axis.Title.Show">
+        <svg:g *ngIf="Axis.Position == 'Top' || Axis.Position == 'Bottom'">
+            <svg:text [attr.stroke]="Axis.Title.Style.Color"
+                      [attr.stroke-width]="Axis.Title.Style.Thickness"
+                      [attr.font-size]="Axis.Title.Style.FontSize"
+                      [attr.fill]="Axis.Title.Style.Fill"
+                      [attr.x]="Dimensions.Plot.X + Dimensions.Plot.Width / 2"
+                      [attr.y]="(Axis.Position == 'Top' ? Axis.Title.Space / 2 : Dimensions.PlotWAxesALabels.Height - Axis.Title.Space / 2 + Axis.Title.Style.FontSize)"
+                      [attr.text-anchor]="'middle'">
+                {{Axis.Title.Text}}
+            </svg:text>
+        </svg:g>
+        <svg:g *ngIf="Axis.Position == 'Left' || Axis.Position == 'Right'">
+            <svg:text *ngIf="Axis.Title.Show"
+                      [attr.stroke]="Axis.Title.Style.Color"
+                      [attr.stroke-width]="Axis.Title.Style.Thickness"
+                      [attr.font-size]="Axis.Title.Style.FontSize"
+                      [attr.fill]="Axis.Title.Style.Fill"
+                      [attr.x]="(Axis.Position == 'Left' ? 0 : Dimensions.PlotWAxesALabels.Width - Axis.Title.Space / 2)"
+                      [attr.y]="Dimensions.Plot.Height / 2"
+                      [attr.transform]="Rotate"
+                      [attr.text-anchor]="'middle'">
+                {{Axis.Title.Text}}
+            </svg:text>
+        </svg:g>
+    </svg:g>
+    <svg:g [attr.transform]="Transform">
+        <svg:g ngc-axis-ticks [Axis]="Axis" [Scale]="Scale" [Dimensions]="Dimensions" [TickLabelLocation]="TickLabelLocation"></svg:g>
+    </svg:g>
+
+</svg:g>

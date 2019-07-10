@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, AfterViewInit, DoCheck, EventEmitter, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 import { BaseChartClass, BaseChart } from '../../Components/Base/Base.Class';
 import { LineSeries } from '../../Components/Series/Series.Classes';
-import { Axis } from '../../Components/Axes/Axes.Classes';
+import { Axis } from '../../Components/Axis/Axis.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { LegendOptions } from '../../Components/Legend/Legend.Classes';
 

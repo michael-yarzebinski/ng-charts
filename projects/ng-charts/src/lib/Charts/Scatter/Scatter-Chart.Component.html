@@ -1,10 +1,10 @@
 <ngc-base-chart [Width]="Width" [Height]="Height" [Dimensions]="Dimensions"  [Series]="Series" [LegendOptions]="LegendOptions">
     <svg:g [attr.transform]="Transform">
         <!--X Axis-->
-        <svg:g ngc-x-axis [Scale]="XScale" [Axis]="XAxis" [Dimensions]="Dimensions"></svg:g>
+        <svg:g ngc-axis [Scale]="XScale" [Axis]="XAxis" [Dimensions]="Dimensions"></svg:g>
         <!--Y Axes-->
         <svg:g *ngFor="let axis of YAxes">
-            <svg:g ngc-y-axis [Scale]="(axis.Position == 'Left' ? Y1Scale : Y2Scale)" [Axis]="axis" [Dimensions]="Dimensions"></svg:g>
+            <svg:g ngc-axis [Scale]="(axis.Position == 'Left' ? Y1Scale : Y2Scale)" [Axis]="axis" [Dimensions]="Dimensions"></svg:g>
         </svg:g>
         <!--Clip Path-->
         <svg:defs>

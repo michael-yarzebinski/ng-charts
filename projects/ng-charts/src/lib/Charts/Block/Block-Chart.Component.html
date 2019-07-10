@@ -1,10 +1,8 @@
 <ngc-base-chart [Width]="Width" [Height]="Height" [Dimensions]="Dimensions" [Series]="Series" [LegendOptions]="LegendOptions">
     <svg:g [attr.transform]="Transform">
-        <!--X Axis-->
-        <svg:g ngc-axis [Scale]="XScale" [Axis]="XAxis" [Dimensions]="Dimensions"></svg:g>
-        <!--Y Axes-->
+        <svg:g ngc-axis [Scale]="XScale" [Axis]="XAxis" [Dimensions]="Dimensions" [TickLabelLocation]="'Center'"></svg:g>
         <svg:g *ngFor="let axis of YAxes">
-            <svg:g ngc-axis [Scale]="(axis.Position == 'Left' ? Y1Scale : Y2Scale)" [Axis]="axis" [Dimensions]="Dimensions"></svg:g>
+            <svg:g ngc-axis [Scale]="YScale" [Axis]="axis" [Dimensions]="Dimensions" [TickLabelLocation]="'OnTick'"></svg:g>
         </svg:g>
         <!--Clip Path-->
         <svg:defs>
@@ -13,7 +11,7 @@
                           [attr.height]="Dimensions.Plot.Height"
                           [attr.x]="Dimensions.PlotWAxes.X + Dimensions.Plot.X"
                           [attr.y]="Dimensions.PlotWAxes.Y + Dimensions.Plot.Y" />
-                
+
             </svg:clipPath>
         </svg:defs>
         <!--Rectangle for Hover Overs.-->
@@ -25,22 +23,20 @@
                   [attr.opacity]="0"
                   (mousemove)="MouseMoveOverChart($event)"
                   (mouseover)="ChangeMouseOverChart(true)"
-                  (mouseleave)="ChangeMouseOverChart(false, $event)"
-                  />
+                  (mouseleave)="ChangeMouseOverChart(false, $event)" />
         <!--Series-->
         <svg:g [attr.clip-path]="ClipPath">
             <svg:g *ngFor="let series of Series">
-                <svg:g ngc-line-series
+                <svg:g ngc-block-series
                        [Series]="series"
                        [XScale]="XScale"
-                       [YScale]="(series.YAxis == 'Left' ? Y1Scale : Y2Scale)"
+                       [YScale]="YScale"
                        [Dimensions]="Dimensions"
+                       [Orientation]="ChartOrientation"
                        [MouseOverChart]="ChartHover"
-                       (MouseOverSeries)="MouseMoveOverChart($event)"
-                       />
+                       (MouseOverSeries)="MouseMoveOverChart($event)" />
 
             </svg:g>
         </svg:g>
-
     </svg:g>
-</ngc-base-chart> 
+</ngc-base-chart>

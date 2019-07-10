@@ -2,14 +2,23 @@
   "ExpandedNodes": [
     "",
     "\\projects",
-    "\\projects\\demo",
-    "\\projects\\demo\\src",
-    "\\projects\\docs",
+    "\\projects\\ng-charts",
     "\\projects\\ng-charts\\src",
     "\\projects\\ng-charts\\src\\lib",
+    "\\projects\\ng-charts\\src\\lib\\Charts",
+    "\\projects\\ng-charts\\src\\lib\\Charts\\Block",
     "\\projects\\ng-charts\\src\\lib\\Components",
-    "\\projects\\ng-charts\\src\\lib\\Components\\Base"
+    "\\projects\\ng-charts\\src\\lib\\Components\\Axis",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Axis\\Ticks",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Base",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Series",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Series\\BlockSeries",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Series\\CircleSeries",
+    "\\projects\\ng-charts\\src\\lib\\Components\\Series\\ScatterSeries",
+    "\\projects\\ng-charts\\src\\lib\\SVG",
+    "\\projects\\ng-charts\\src\\lib\\SVG\\Area",
+    "\\projects\\ng-charts\\src\\lib\\SVG\\Rectangle"
   ],
-  "SelectedNode": "\\projects\\docs\\README.md",
+  "SelectedNode": "\\projects\\ng-charts\\src\\lib\\SVG\\Rectangle\\Rectangle.Component.html",
   "PreviewInSolutionExplorer": false
 }

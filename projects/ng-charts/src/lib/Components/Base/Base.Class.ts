@@ -1,12 +1,13 @@
 import { HostListener, EventEmitter } from '@angular/core'
 
-import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
+import { scaleBand, scaleLinear, scalePoint, scaleTime, scaleOrdinal } from 'd3-scale';
 
-import { Point, AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
+import { Point, Bar, Block, AreaSeries, LineSeries, ScatterSeries, BarSeries, BlockSeries } from '../Series/Series.Classes';
 import { Dimensions, Dimension } from '../../AdditionalClasses/AdditionalClasses';
-import { Axis } from '../Axes/Axes.Classes';
+import { Axis } from '../Axis/Axis.Classes';
 import { LegendOptions } from '../Legend/Legend.Classes';
 import { TooltipParameters } from '../Tooltip/Tooltip.Class';
+import { debug } from 'util';
 
 
 export interface BaseChart
@@ -27,20 +28,31 @@ export class BaseChartClass implements BaseChart
     update()
     {
     }
-    public BuildXScale(Series: (AreaSeries | LineSeries | ScatterSeries)[], Width: number, Min?: any, Max?: any, Reverse?: boolean): any
+    public BuildXScale(Series: (AreaSeries | LineSeries | ScatterSeries | BarSeries | BlockSeries)[], Width: number, Min?: any, Max?: any, Reverse?: boolean, BarPadding?: number): any
     {
+        //debugger;
         // #region Get X Domain
         let uniqueValues = [];
         for (let series of Series) {
-            for (let point of series.Data) { 
-                if (!uniqueValues.includes(point.X)) {
-                    uniqueValues.push(point.X);
+            if (series.Type == 'Line' || series.Type == 'Area' || series.Type == 'Scatter') {
+                for (let point of series.Data)
+                {
+                    if (!uniqueValues.includes(point.X))
+                    {
+                        uniqueValues.push(point.X);
+                    }
+                }
+            }
+            else if (series.Type == 'Bar' || series.Type == 'Block') {
+                if (!uniqueValues.includes(series.Name)) {
+                    uniqueValues.push(series.Name);
                 }
             }
         }
 
         let scaleType;
         if (uniqueValues.length > 0) {
+
             scaleType = this.GetScaleType(uniqueValues);
         }
         else if (Min != null || Max != null) {
@@ -75,15 +87,31 @@ export class BaseChartClass implements BaseChart
             scaleType = 'Linear';
         }
 
+        if (scaleType == 'Linear' || scaleType == 'Time')   //Sorts the unique values for plotting only if it makes sense (not Ordinal)
+        {
+            uniqueValues = uniqueValues.sort((a: any, b: any) => {
+                if (a < b) {
+                    return -1;
+                }
+                else if (a > b) {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            });
+        }
+
         let domain = [];
         let min, max;
 
         if (scaleType == 'Linear') {
             uniqueValues = uniqueValues.map(v => Number(v));    //Converts all of Unique Values to numbers if they're in string form.
         }
-
         if (scaleType == 'Time' || scaleType == 'Linear')   //Define min and max for reasonable scale types.
-        {
+        {        
             min = Min != null ? Min : Math.min(...uniqueValues);
             max = Max != null ? Max : Math.max(...uniqueValues);
         }
@@ -113,46 +141,132 @@ export class BaseChartClass implements BaseChart
 
         if (scaleType == 'Time') {
             scale = scaleTime();
+            scale.range([0, Width]).domain(domain);
         }
         else if (scaleType == 'Linear') {
             scale = scaleLinear();
+            scale.range([0, Width]).domain(domain);
         }
         else if (scaleType == 'Ordinal')   //Could be an else.
         {
-            scale = scalePoint().padding(0.1);
+            BarPadding = 0;
+            scale = scaleBand()
+                .domain(domain)
+                .range([0, Width])
+                .padding(BarPadding);
+            //scale.range([0, Width]).domain(domain);//.paddingInner(25);    
         }
-        scale.range([0, Width]).domain(domain);
+        //scale.range([0, Width]).domain(domain);
         // #endregion
 
         return scale;
     }
 
-    public BuildYScale(Series: (AreaSeries | LineSeries | ScatterSeries)[], Height: number, Min?: any, Max?: any, Reverse?: boolean): any
+    public BuildYScale(Series: (AreaSeries | LineSeries | ScatterSeries | BarSeries | BlockSeries)[], Height: number, Min?: any, Max?: any, Reverse?: boolean): any
     {
+
+        // #region Get Y Domain
         let uniqueValues = [];
         for (let series of Series) {
-            for (let point of series.Data) {
-                if (!uniqueValues.includes(point.Y)) {
-                    uniqueValues.push(point.Y);
+            if (series.Type == 'Line' || series.Type == 'Area' || series.Type == 'Scatter') {
+                for (let point of series.Data) {
+                    if (!uniqueValues.includes(point.X)) {
+                        uniqueValues.push(point.X);
+                    }
+                }
+            }
+            else if (series.Type == 'Bar') {
+                for (let bar of series.Data) {
+                    if (!uniqueValues.includes(bar.Value)) {
+                        uniqueValues.push(bar.Value);
+                    }
+                }
+            }
+            else if (series.Type == 'Block') {
+                for (let block of series.Data) {
+                    if (!uniqueValues.includes(block.Start)) {
+                        uniqueValues.push(block.Start);
+                    }
+                    if (!uniqueValues.includes(block.End)) {
+                        uniqueValues.push(block.End);
+                    }
                 }
             }
         }
 
-        let min, max;
 
-        min = Min != undefined ? Min : Math.min(...uniqueValues);
-        max = Max != undefined ? Max : Math.max(...uniqueValues);
+        // #region Determine Scale Type
+        let scaleType;
+        //debugger;
+        if (uniqueValues.length > 0) {
+            scaleType = this.GetScaleType(uniqueValues);
+        }
+        else if (Min != null || Max != null) {
+            if (Min != null && Max != null) {
+                let minPoint: Point = {
+                    X: Min,
+                    Y: 0
+                };
+                let maxPoint: Point = {
+                    X: Max,
+                    Y: 0
+                }
+                scaleType = this.GetScaleType([minPoint, maxPoint]);
+            }
+            else if (Min != null) {
+                let minPoint: Point = {
+                    X: Min,
+                    Y: 0
+                };
+                scaleType = this.GetScaleType([minPoint]);
+            }
+            else if (Max != null) {
+                let maxPoint: Point = {
+                    X: Max,
+                    Y: 0
+                }
+                scaleType = this.GetScaleType([maxPoint]);
+            }
+
+        }
+        else {
+            scaleType = 'Linear';
+        }
+        // #endregion
+        let min, max;
+        if (scaleType == 'Time') {
+            min = Min != undefined ? Min : new Date(Math.min.apply(null, uniqueValues));
+            max = Max != undefined ? Max : new Date(Math.max.apply(null, uniqueValues));
+        }
+        else
+        {
+            min = Min != undefined ? Min : Math.min(...uniqueValues);
+            max = Max != undefined ? Max : Math.max(...uniqueValues);
+        }
+
+        //let min, max;
+
+        //min = Min != undefined ? Min : Math.min(...uniqueValues);
+        //max = Max != undefined ? Max : Math.max(...uniqueValues);
 
         let domain = [min, max];
 
+        // #region Reverse Domain if necessary.
+        if (scaleType == 'Time')    //Time axis behaves wierd on the Y.
+        {
+            domain = domain.reverse();
+        }
         if (Reverse)
         {
             domain = domain.reverse();
         }
-
+        // #endregion
+        // #endregion
+        //#region Get Y Scale
         const scale = scaleLinear()
             .range([Height, 0])
             .domain(domain);
+        // #endregion
 
         return scale;
     }
@@ -166,12 +280,11 @@ export class BaseChartClass implements BaseChart
         {
             return 'Linear';
         }
-
         for (const point of Points) {
-            if (!(point.X instanceof Date)) {
+            if (!(point instanceof Date)) {
                 IsDate = false;
             }
-            else if (typeof point.X !== 'number') {
+            if (typeof point !== 'number') {
 
                 isNum = false;
                 break;  //If its not a date and not a number, its ordinal.
@@ -180,31 +293,52 @@ export class BaseChartClass implements BaseChart
         return (IsDate ? 'Time' : (isNum ? 'Linear' : 'Ordinal'));
     }
 
-    public CalculateDimensions(Width: number, Height: number, XAxis:Axis, YAxes: Axis[], LegendOptions: LegendOptions): Dimensions
+    public CalculateDimensions(Width: number, Height: number, XAxis:Axis, YAxes: Axis[], LegendOptions: LegendOptions, ChartOrientation?: "Horizontal" | "Vertical"): Dimensions
     {
         let chartDimensions = new Dimensions();
         chartDimensions.Width = Width;
         chartDimensions.Height = Height;
 
-        chartDimensions.PlotWAxesALabels = new Dimension();
-        chartDimensions.PlotWAxesALabels.X = (LegendOptions.Position == 'Left' ? LegendOptions.Space : 0); 
-        chartDimensions.PlotWAxesALabels.Y = (LegendOptions.Position == 'Top' ? LegendOptions.Space : 0);
-        chartDimensions.PlotWAxesALabels.Width = chartDimensions.Width - (LegendOptions.Position == 'Right' ? LegendOptions.Space : 0) - chartDimensions.PlotWAxesALabels.X;
-        chartDimensions.PlotWAxesALabels.Height = chartDimensions.Height - (LegendOptions.Position == 'Bottom' ? LegendOptions.Space : 0) - chartDimensions.PlotWAxesALabels.Y;
+        if (ChartOrientation == null || ChartOrientation == "Horizontal") {
+            chartDimensions.PlotWAxesALabels = new Dimension();
+            chartDimensions.PlotWAxesALabels.X = (LegendOptions.Position == 'Left' ? LegendOptions.Space : 0);
+            chartDimensions.PlotWAxesALabels.Y = (LegendOptions.Position == 'Top' ? LegendOptions.Space : 0);
+            chartDimensions.PlotWAxesALabels.Width = chartDimensions.Width - (LegendOptions.Position == 'Right' ? LegendOptions.Space : 0) - chartDimensions.PlotWAxesALabels.X;
+            chartDimensions.PlotWAxesALabels.Height = chartDimensions.Height - (LegendOptions.Position == 'Bottom' ? LegendOptions.Space : 0) - chartDimensions.PlotWAxesALabels.Y;
 
+            chartDimensions.PlotWAxes = new Dimension();
+            chartDimensions.PlotWAxes.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 ? YAxes.find((axis) => axis.Position == 'Left').Title.Space : 0);// + chartDimensions.PlotWAxesALabels.X;   //If the X Axis is on the top, leave space for the label.
+            chartDimensions.PlotWAxes.Y = (XAxis.Position == 'Top' ? XAxis.Title.Space : 0);// + chartDimensions.PlotWAxesALabels.Y;
+            chartDimensions.PlotWAxes.Width = chartDimensions.PlotWAxesALabels.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Title.Space : 0) - chartDimensions.PlotWAxes.X;
+            chartDimensions.PlotWAxes.Height = chartDimensions.PlotWAxesALabels.Height - (XAxis.Position == 'Bottom' ? XAxis.Title.Space : 0) - chartDimensions.PlotWAxes.Y;
 
-        chartDimensions.PlotWAxes = new Dimension();
-        chartDimensions.PlotWAxes.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 ? YAxes.find((axis) => axis.Position == 'Left').Title.Space : 0);// + chartDimensions.PlotWAxesALabels.X;   //If the X Axis is on the top, leave space for the label.
-        chartDimensions.PlotWAxes.Y = (XAxis.Position == 'Top' ? XAxis.Title.Space : 0);// + chartDimensions.PlotWAxesALabels.Y;
-        chartDimensions.PlotWAxes.Width = chartDimensions.PlotWAxesALabels.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Title.Space : 0) - chartDimensions.PlotWAxes.X;
-        chartDimensions.PlotWAxes.Height = chartDimensions.PlotWAxesALabels.Height - (XAxis.Position == 'Bottom' ? XAxis.Title.Space : 0) - chartDimensions.PlotWAxes.Y;
-        
+            chartDimensions.Plot = new Dimension();
+            chartDimensions.Plot.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 && YAxes.find((axis) => axis.Position == 'Left').Labels.Show ? YAxes.find((axis) => axis.Position == 'Left').Labels.Space : 0);// + chartDimensions.PlotWAxes.X;
+            chartDimensions.Plot.Y = (XAxis.Labels.Show && XAxis.Position == 'Top' ? XAxis.Labels.Space : 0);// + chartDimensions.PlotWAxes.Y;
+            chartDimensions.Plot.Height = chartDimensions.PlotWAxes.Height - (XAxis.Position == 'Bottom' ? XAxis.Labels.Space : 0) - chartDimensions.Plot.Y;
+            chartDimensions.Plot.Width = chartDimensions.PlotWAxes.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Labels.Space : 0) - chartDimensions.Plot.X;
+        }
+        else if(ChartOrientation == "Vertical") //X Axis is on the left.
+        {
+            //Legend stuff stays the same.
+            chartDimensions.PlotWAxesALabels = new Dimension();
+            chartDimensions.PlotWAxesALabels.X = (LegendOptions.Position == 'Left' ? LegendOptions.Space : 0);
+            chartDimensions.PlotWAxesALabels.Y = (LegendOptions.Position == 'Top' ? LegendOptions.Space : 0);
+            chartDimensions.PlotWAxesALabels.Width = chartDimensions.Width - (LegendOptions.Position == 'Right' ? LegendOptions.Space : 0) - chartDimensions.PlotWAxesALabels.X;
+            chartDimensions.PlotWAxesALabels.Height = chartDimensions.Height - (LegendOptions.Position == 'Bottom' ? LegendOptions.Space : 0) - chartDimensions.PlotWAxesALabels.Y;
 
-        chartDimensions.Plot = new Dimension();
-        chartDimensions.Plot.X = (YAxes.findIndex((axis) => axis.Position == 'Left') > -1 && YAxes.find((axis) => axis.Position == 'Left').Labels.Show ? YAxes.find((axis) => axis.Position == 'Left').Labels.Space : 0);// + chartDimensions.PlotWAxes.X;
-        chartDimensions.Plot.Y = (XAxis.Labels.Show && XAxis.Position == 'Top' ? XAxis.Labels.Space : 0);// + chartDimensions.PlotWAxes.Y;
-        chartDimensions.Plot.Height = chartDimensions.PlotWAxes.Height - (XAxis.Position == 'Bottom' ? XAxis.Labels.Space : 0) - chartDimensions.Plot.Y;
-        chartDimensions.Plot.Width = chartDimensions.PlotWAxes.Width - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Labels.Space : 0) - chartDimensions.Plot.X;
+            chartDimensions.PlotWAxes = new Dimension();
+            chartDimensions.PlotWAxes.X = (XAxis.Position == 'Left' ? XAxis.Title.Space : 0);
+            chartDimensions.PlotWAxes.Y = (YAxes.findIndex((axis) => axis.Position == 'Top') > -1 ? YAxes.find((axis) => axis.Position == 'Top').Title.Space : 0);
+            chartDimensions.PlotWAxes.Width = chartDimensions.PlotWAxesALabels.Width - (XAxis.Position == 'Right' ? XAxis.Title.Space : 0) - chartDimensions.PlotWAxes.X;
+            chartDimensions.PlotWAxes.Height = chartDimensions.PlotWAxesALabels.Height - (YAxes.findIndex((axis) => axis.Position == 'Bottom') > -1 ? YAxes.find((axis) => axis.Position == 'Bottom').Title.Space : 0) - chartDimensions.PlotWAxes.Y;
+
+            chartDimensions.Plot = new Dimension();
+            chartDimensions.Plot.X = (XAxis.Labels.Show && XAxis.Position == 'Left' ? XAxis.Labels.Space : 0);
+            chartDimensions.Plot.Y = (YAxes.findIndex((axis) => axis.Position == 'Top') > -1 && YAxes.find((axis) => axis.Position == 'Top').Labels.Show ? YAxes.find((axis) => axis.Position == 'Top').Labels.Space : 0);            
+            chartDimensions.Plot.Height = chartDimensions.PlotWAxes.Height - (YAxes.findIndex((axis) => axis.Position == 'Right') > -1 ? YAxes.find((axis) => axis.Position == 'Right').Labels.Space : 0)  - chartDimensions.Plot.Y;
+            chartDimensions.Plot.Width = chartDimensions.PlotWAxes.Width - (XAxis.Position == 'Bottom' ? XAxis.Labels.Space : 0) - chartDimensions.Plot.X;
+        }
 
         return chartDimensions;
     }

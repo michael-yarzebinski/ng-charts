@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, TemplateRef, ViewChild, ElementRef } from '@angular/core';
 import { AreaSeries, LineSeries, ScatterSeries } from 'projects/ng-charts/src/lib/Components/Series/Series.Classes';
 import { Line, Polygon } from 'projects/ng-charts/src/lib/SVG/SVG.Classes';
-import { Axis } from '../../../../../ng-charts/src/lib/Components/Axes/Axes.Classes'
+import { Axis } from '../../../../../ng-charts/src/lib/Components/Axis/Axis.Classes'
 import { BuildDefaultAxis, BuildDefaultLegend, BuildDefaultSeries } from '../../../../../ng-charts/src/lib/BuildDefaults'
 import { Point, ScatterPoint } from '../../../../../ng-charts/src/lib/Components/Series/Series.Classes';
 import { LegendOptions } from 'projects/ng-charts/src/lib/Components/Legend/Legend.Classes';

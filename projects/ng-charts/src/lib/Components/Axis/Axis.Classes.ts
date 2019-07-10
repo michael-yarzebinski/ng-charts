@@ -31,6 +31,7 @@ export interface Labels
 {
     Show: boolean;
     Space: number;
+    Rotate: boolean;
     Style: Text;
     Format: Function;
 }

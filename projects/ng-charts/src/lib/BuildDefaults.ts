@@ -1,5 +1,5 @@
 ﻿import { LegendOptions } from "./Components/Legend/Legend.Classes";
-import { Axis } from './Components/Axes/Axes.Classes';
+import { Axis } from './Components/Axis/Axis.Classes';
 import {AreaSeries, LineSeries, ScatterSeries    } from './Components/Series/Series.Classes'
 
 export function BuildDefaultLegend(Position: 'Top' | 'Left' | 'Bottom' | 'Right', Orientation: 'Horizontal' | 'Vertical') : LegendOptions
@@ -42,6 +42,7 @@ export function BuildDefaultAxis(Title: string, Color: string, Position: 'Left' 
             Show: true,
             Format: function (obj: any) { return obj; },
             Space: 20,
+            Rotate: Position == 'Left' || Position == 'Right',
             Style: {
                 Color: Color,
                 Fill: Color,
@@ -104,7 +105,6 @@ export function BuildDefaultSeries(Name: string, Data: any[], YAxis: 'Left' | 'R
                     Dash : 0
                 }
             },
-            LegendTransform: null,
             Type: 'Area'
         }
         return series;
@@ -132,7 +132,6 @@ export function BuildDefaultSeries(Name: string, Data: any[], YAxis: 'Left' | 'R
                     Dash: 0
                 }
             },
-            LegendTransform: null,
             Type: 'Line'
         }
         return series;
@@ -161,7 +160,6 @@ export function BuildDefaultSeries(Name: string, Data: any[], YAxis: 'Left' | 'R
                     Dash: 0
                 }
             },
-            LegendTransform: null,
             Type: 'Scatter'
         }
         return series;

@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges, EventEmitter, KeyValueDiffer, KeyValueDiffers } from '@angular/core';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { LegendOptions } from '../Legend/Legend.Classes';
-import { AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
+import { AreaSeries, LineSeries, ScatterSeries, BarSeries, BlockSeries } from '../Series/Series.Classes';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class BaseChartComponent
     @Input() Height: number;
     @Input() Dimensions: Dimensions;
     @Input() LegendOptions: LegendOptions;
-    @Input() Series: (AreaSeries | LineSeries | ScatterSeries)[];
+    @Input() Series: (AreaSeries | LineSeries | ScatterSeries | BarSeries | BlockSeries)[];
 
     // #region Differs
     DimensionsDiffer: any;

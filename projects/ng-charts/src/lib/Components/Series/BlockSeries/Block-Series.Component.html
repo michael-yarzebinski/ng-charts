@@ -1,0 +1,22 @@
+<svg:g [attr.transform]="Transform">
+	<svg:g *ngFor="let block of Series.Data">
+		<svg:g ngc-rectangle 
+			   [X]="Orientation == 'Horizontal' ? XScale(Series.Name) + XScale.paddingOuter() : YScale(block.Start)"
+			   [Y]="Orientation == 'Horizontal' ? YScale(block.Start) : XScale(Series.Name) + XScale.paddingOuter()"
+			   [Width]="Orientation == 'Horizontal' ?  XScale.step() : YScale(block.End) - YScale(block.Start)" 
+			   [Height]="Orientation == 'Horizontal' ? YScale(block.End) - YScale(block.Start) : XScale.step()" 
+			    
+			   [Style]="block.SeriesStyle.Style"></svg:g>
+		<svg:text [attr.x]="Orientation == 'Horizontal' ? XScale(Series.Name) + XScale.paddingOuter() + XScale.bandwidth() / 2 : YScale(block.Start) + (YScale(block.End) -  YScale(block.Start)) / 2"
+			      [attr.y]="Orientation == 'Horizontal' ? YScale(block.Start) + (YScale(block.End) - YScale(block.Start)) / 2 : XScale(Series.Name) + XScale.paddingOuter() + XScale.step() / 2"
+				  [attr.stroke]="block.TextStyle.Color"
+                  [attr.stroke-width]="block.TextStyle.Thickness"
+                  [attr.font-size]="block.TextStyle.FontSize"
+                  [attr.fill]="block.TextStyle.Fill"
+                  [attr.text-anchor]="'middle'"
+				  >
+			{{block.Text}}
+		</svg:text> 
+
+	</svg:g>
+</svg:g>

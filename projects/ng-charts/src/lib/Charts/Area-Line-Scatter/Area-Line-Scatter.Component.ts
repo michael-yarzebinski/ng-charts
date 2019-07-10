@@ -1,7 +1,7 @@
 import { Component, Input, KeyValueDiffers } from '@angular/core';
 import { BaseChartClass, BaseChart } from '../../Components/Base/Base.Class';
 import { AreaSeries, LineSeries, ScatterSeries } from '../../Components/Series/Series.Classes';
-import { Axis } from '../../Components/Axes/Axes.Classes';
+import { Axis } from '../../Components/Axis/Axis.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { LegendOptions } from '../../Components/Legend/Legend.Classes';
 
@@ -66,10 +66,11 @@ export class AreaLineScatterChart extends BaseChartClass implements BaseChart
 
     update()
     {
+        console.log("Updating Area Chart");
         this.ClipPath = "";
         this.Dimensions = this.CalculateDimensions(this.Width, this.Height, this.XAxis, this.YAxes, this.LegendOptions);
         this.XScale = this.BuildXScale(this.CombineChartSeries([this.AreaSeries, this.LineSeries, this.ScatterSeries]), this.Dimensions.Plot.Width, this.XAxis.Min, this.XAxis.Max, this.XAxis.Reverse);
-        //console.log(this.XScale);
+        console.log(this.XScale);
         if (this.YAxes.find((axis) => axis.Position == 'Left')) {
             this.Y1Scale = this.BuildYScale([...this.AreaSeries.filter(series => series.YAxis == 'Left'), ...this.LineSeries.filter(series => series.YAxis == 'Left'), ...this.ScatterSeries.filter(series => series.YAxis == 'Left')], this.Dimensions.Plot.Height, this.YAxes.find((axis) => axis.Position == 'Left').Min, this.YAxes.find((axis) => axis.Position == 'Left').Max, this.YAxes.find((axis) => axis.Position == 'Left').Reverse);
         }

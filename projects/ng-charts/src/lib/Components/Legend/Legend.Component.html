@@ -9,7 +9,7 @@
                       [attr.stroke]="series.Style.Color"
                       [attr.stroke-width]="2"
                       [attr.dash]="series.Style.Dash" />
-            <svg:rect *ngIf="series.Type == 'Area'"
+            <svg:rect *ngIf="series.Type == 'Square'"
                       [attr.x]="0"
                       [attr.y]="0"
                       [attr.rx]="LegendOptions.Style.FontSize / 10"
@@ -19,7 +19,7 @@
                       [attr.stroke]="series.Style.Color"
                       [attr.stroke-width]="LegendOptions.Style.Thickness"
                       [attr.fill]="series.Style.Fill" />
-            <svg:circle *ngIf="series.Type == 'Scatter'"
+            <svg:circle *ngIf="series.Type == 'Circle'"
                         [attr.cx]="LegendOptions.Style.FontSize / 2"
                         [attr.cy]="LegendOptions.Style.FontSize / 2"
                         [attr.r]="LegendOptions.Style.FontSize / 2"

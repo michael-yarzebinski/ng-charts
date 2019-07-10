@@ -1,5 +1,6 @@
 import { Component, Input, AfterViewInit, KeyValueDiffers, ViewChild, ViewChildren, TemplateRef, ElementRef, QueryList } from '@angular/core';
-import { AreaSeries, LineSeries, ScatterSeries } from '../Series/Series.Classes';
+import { Line, Polygon } from '../../SVG/SVG.Classes';
+import { AreaSeries, LineSeries, ScatterSeries, BarSeries, BlockSeries } from '../Series/Series.Classes';
 import { LegendOptions } from './Legend.Classes';
 import { Dimensions } from '../../AdditionalClasses/AdditionalClasses';
 import { Template } from '@angular/compiler/src/render3/r3_ast';
@@ -12,9 +13,10 @@ export class LegendComponent
 {
     HideText: boolean = true;
     @Input() Dimensions: Dimensions
-    @Input() Series: (AreaSeries | LineSeries | ScatterSeries)[];
+    @Input() InputSeries: (AreaSeries | LineSeries | ScatterSeries | BarSeries | BlockSeries)[];
     @Input() LegendOptions: LegendOptions;
 
+    Series: LegendSeries[] = [];
     Transform: string;
 
     SeriesPosition: any[];
@@ -68,8 +70,78 @@ export class LegendComponent
 
     update()
     {
+        this.DetermineLegendSeries();
         this.DetermineLegendTransform();
         this.DetermineSeriesTransform();
+    }
+
+    DetermineLegendSeries(): void
+    {
+        this.Series = [];
+        for (let series of this.InputSeries)
+        {
+            if (series.Type == 'Line') {
+                let newSeries: LegendSeries =
+                {
+                    Name: series.Name,
+                    Type: 'Line',
+                    LegendTransform: '',
+                    Style: series.Style
+                };
+                this.Series.push(newSeries);
+            }
+            else if (series.Type == 'Area') {
+                let newSeries: LegendSeries =
+                {
+                    Name: series.Name,
+                    Type: 'Square',
+                    LegendTransform: '',
+                    Style: series.Style
+                };
+                this.Series.push(newSeries);
+            }
+            else if (series.Type == 'Scatter') {
+                let newSeries: LegendSeries =
+                {
+                    Name: series.Name,
+                    Type: 'Circle',
+                    LegendTransform: '',
+                    Style: series.Style
+                };
+                this.Series.push(newSeries);
+            }
+            else if (series.Type == 'Bar')
+            {
+                for (let bar of series.Data)
+                {
+                    if (this.Series.findIndex((val) => val.Name == bar.SeriesStyle.Name) == -1)
+                    {
+                        let newSeries: LegendSeries =
+                        {
+                            Name: bar.SeriesStyle.Name,
+                            Type: 'Square',
+                            LegendTransform: '',
+                            Style: bar.SeriesStyle.Style
+                        };
+                        this.Series.push(newSeries);
+                    }
+                }
+            }
+            else if (series.Type == 'Block') {
+                for (let block of series.Data) {
+                    if (this.Series.findIndex((val) => val.Name == block.SeriesStyle.Name) == -1) {
+                        let newSeries: LegendSeries =
+                        {
+                            Name: block.SeriesStyle.Name,
+                            Type: 'Square',
+                            LegendTransform: '',
+                            Style: block.SeriesStyle.Style
+                        };
+                        this.Series.push(newSeries);
+                    }
+                }
+            }
+        }
     }
 
     DetermineLegendTransform(): void
@@ -160,4 +232,12 @@ export class LegendComponent
             }
         }
     }
+}
+
+interface LegendSeries
+{
+    Name: string;
+    Type: 'Line' | 'Square' | 'Circle';
+    LegendTransform: string;
+    Style: Line | Polygon; 
 }
