@@ -30,9 +30,9 @@ For more combinations, just ask!
 - Custom spacing of all objects.
 
 For more information check out the following sources:
-- [Docs](https://yarz-tech.github.io/ng-charts/Docs)
-- [Demo](https://yarz-tech.github.io/ng-charts/Demo)
-- [GitHub](https://github.com/yarz-tech/ng-charts)
+- [Docs](https://yg-technology.github.io/ng-charts/Docs)
+- [Demo](https://yg-technology.github.io/ng-charts/Demo)
+- [GitHub](https://github.com/yg-technology/ng-charts)
 - [npm](https://www.npmjs.com/package/@yarz-tech/ng-charts) 
 
 ## Update History
